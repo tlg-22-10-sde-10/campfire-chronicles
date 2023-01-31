@@ -24,7 +24,7 @@
   </ol>
 
 ### Team Members
-+ David Rodriguez
++ David Rodrigues
 + Sarthak Singh
 + Alex Aguilar
 
