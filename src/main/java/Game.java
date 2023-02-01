@@ -8,7 +8,7 @@ public class Game {
 
     public void showTitle() throws Exception {
         //File path is passed as parameter
-        File file = new File("C:\\TLG\\Game\\src\\main\\Title.txt");
+        File file = new File("./Title.txt");
 
         //Creating an object of BufferedReader class
         BufferedReader br = new BufferedReader(new FileReader(file));
