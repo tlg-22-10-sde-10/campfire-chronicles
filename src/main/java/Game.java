@@ -17,7 +17,7 @@ public class Game {
 
     public static void showTitle() throws Exception {
         //File path is passed as parameter "Bug Figure Out how to open in Github"
-        File file = new File("C:\\Users\\sarth\\Downloads\\Campfire-Chronicles\\src\\main\\java\\Title.txt");
+        File file = new File("src/main/java/Title.txt");
 
         //Creating an object of BufferedReader class
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -84,7 +84,7 @@ public class Game {
             System.out.println("Close Main Menu (select 3)");
             System.out.println("Help (select 4)");
             System.out.println("Quit Game (select 5)");
-            System.out.println("------ Main Menu -------");
+            System.out.println("------ Main Menu ------");
         }
         /**
          * This will get the player's input
