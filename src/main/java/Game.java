@@ -8,7 +8,7 @@ public class Game {
 
     public void showTitle() throws Exception {
         //File path is passed as parameter
-        File file = new File("C:\\TLG\\Game\\src\\main\\Title.txt");
+        File file = new File("src/main/java/Title.txt");
 
         //Creating an object of BufferedReader class
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -16,7 +16,7 @@ public class Game {
         //Declaring a string variable
         String title;
 
-        //Condition holds true till there is character in astring
+        //Condition holds true till there is character in a string
         while ((title = br.readLine()) !=null){
             System.out.println(ANSI_RED + title + ANSI_RESET);
         }
