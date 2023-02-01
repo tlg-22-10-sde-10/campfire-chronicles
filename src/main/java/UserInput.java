@@ -4,9 +4,27 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class UserInput {
+    public UserInput() {
+    }
+    public static void titleInput() throws Exception {
+        UserInput newUserInput = new UserInput();
+        final String homePageInput = Game.getHomePage();
+        if (homePageInput.equals("1")) {
+            System.out.println("New Game has been selected");
+            newUserInput.getAction();
 
+        } else if (homePageInput.equals("2")) {
+            System.out.println("Developement in progress");
 
-    public String getInput() throws IOException {
+        } else if (homePageInput.equals("3")) {
+            Game.displayHelp();
+        } else if (homePageInput.equals("4")) {
+        } else {
+            System.out.println("Wrong input, try again by typing a digit from 1-4");
+        }
+    }
+
+    public String getAction() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String toParse;
         String action;
@@ -34,7 +52,7 @@ public class UserInput {
             output = "help";
         }
         else if (lowerCase.equals("quit")) {
-            output = "quit";
+            output = "Goodbye";
         }
 
         else {
@@ -55,7 +73,6 @@ public class UserInput {
         String verb = words.get(0);
         String noun = words.get(words.size() - 1);
         String output;
-
         List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go"));
         List<String> objects = new ArrayList<>(Arrays.asList("north", "south", "east", "west", "bat", "drink", "key", ""));
 
@@ -72,7 +89,7 @@ public class UserInput {
     public static void main(String[] args) {
         UserInput userInput = new UserInput();
         try {
-            userInput.getInput();
+            userInput.getAction();
         } catch (IOException e) {
             e.printStackTrace();
         }

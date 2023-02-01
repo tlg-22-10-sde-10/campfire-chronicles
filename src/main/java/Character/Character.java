@@ -6,6 +6,6 @@ public class Character {
     private int attack;
     private String location;
 
-
-
+    public Character() {
+    }
 }
