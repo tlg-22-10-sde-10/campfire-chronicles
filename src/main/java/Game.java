@@ -84,7 +84,7 @@ public class Game {
             System.out.println("Close Main Menu (select 3)");
             System.out.println("Help (select 4)");
             System.out.println("Quit Game (select 5)");
-            System.out.println("------ Main Menu -------");
+            System.out.println("------ Main Menu ------");
         }
         /**
          * This will get the player's input
