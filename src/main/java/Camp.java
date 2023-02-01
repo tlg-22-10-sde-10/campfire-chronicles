@@ -6,11 +6,8 @@ public class Camp {
     public static void startGame() throws Exception {
         Game.showTitle();
         final String homePageInput = Game.getHomePage();
-
         if (homePageInput.equals("1")) {
-
             System.out.println("New Game has been selected");
-
         } else if (homePageInput.equals("2")) {
             System.out.println("Developement in progress");
 
