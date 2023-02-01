@@ -15,8 +15,10 @@ public class Game {
     private static final char QUIT_OPTION = 'Q';
 
 
+
     public static void showTitle() throws Exception {
         //File path is passed as parameter "Bug Figure Out how to open in Github"
+
         File file = new File("src/main/java/Title.txt");
 
         //Creating an object of BufferedReader class
@@ -25,8 +27,10 @@ public class Game {
         //Declaring a string variable
         String title;
 
+
         //Condition holds true till there is character in astring
         while ((title = br.readLine()) != null) {
+
             System.out.println(ANSI_RED + title + ANSI_RESET);
         }
         System.out.println("Please select an option: ");
