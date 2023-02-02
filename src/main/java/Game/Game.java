@@ -1,6 +1,7 @@
 package Game;
 
 import ReadExternal.readExternalFiles;
+import UserInputs.UserInput;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -40,18 +41,6 @@ public class Game {
 
             System.out.println(ANSI_RED + title + ANSI_RESET);
         }
-        System.out.println("Please select an option: ");
-        String text = "\" New Game.Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
-        //Iterating String and printing one character at a time.
-        for (int i = 0; i < text.length(); i++) {
-            System.out.printf("%c", text.charAt(i));
-            try {
-                Thread.sleep(5);//0.5s pause between characters
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-        }
-
     }
 
 
@@ -97,6 +86,20 @@ public class Game {
             }
             return menuInput;
         }
+    /**
+     * This method is responsible for getting input the main screen
+     * [1,2,3,4]
+     * @return String
+     */
+    public static String getCharectorSelect() {
+        String charectorinput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5","6"));
+        while (!options.contains(charectorinput)) {
+            System.out.println("Invalid input, try again.");
+            charectorinput = SC.next();
+        }
+        return charectorinput;
+    }
 
 
         /**
@@ -121,14 +124,29 @@ public class Game {
             return userA.toLowerCase();
         }
 
-    public static void displayHelp() {
+    /**
+     * This method is responsible for getting input the Help Screen
+     * [1,2]
+     * @return String
+     */
+    public static String getHelpSelect() {
+        String helpinput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2"));
+        while (!options.contains(helpinput)) {
+            System.out.println("Invalid input, try again.");
+            helpinput = SC.next();
+        }
+        return helpinput;
+    }
+
+    public static void displayHelp() throws Exception {
         System.out.println(" --- HELP SCREEN ----");
         System.out.println("Press 'M' for menu screen in the game.");
         System.out.println("'Yellow' represents the rooms you have unlocked.");
         System.out.println("'Red' represents the room that you haven't visited.");
         System.out.println("'Green' represents the room you are in.");
         System.out.println("Press 'C' for cheats ");
-        System.out.println();
+        UserInput.helpInput();
     }
 }
 

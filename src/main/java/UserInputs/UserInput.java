@@ -11,14 +11,29 @@ public class UserInput {
     public UserInput() {
     }
     public static void titleInput() throws Exception {
-
-        final String homePageInput = Game.getHomePage();
+        System.out.println("Please select an option: ");
+        String text = "\" New Game.Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
+        //Iterating String and printing one character at a time.
+        for (int i = 0; i < text.length(); i++) {
+            System.out.printf("%c", text.charAt(i));
+            try {
+                Thread.sleep(5);//0.5s pause between characters
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.print(">>>");
+        UserInput newUserInput = new UserInput();
+        final String homePageInput = Game.getMainMenu();
         if (homePageInput.equals("1")) {
-            System.out.println("New Game.Game has been selected \n\n");
-            Game.openingText();
-            GameLogic.startGame();
+            System.out.println("New Game.Game has been selected");
+            System.out.println("Character  (select 1)      Character (select 2)      Character (select 3)      Character (select 4)     Back to Main(select 5)   Quit(select 6)");
+            UserInput.CharectorInput();
+            //newUserInput.getAction();
+
         } else if (homePageInput.equals("2")) {
             System.out.println("Development in progress");
+
         } else if (homePageInput.equals("3")) {
             Game.displayHelp();
         } else if (homePageInput.equals("4")) {
@@ -26,6 +41,29 @@ public class UserInput {
             System.out.println("Wrong input, try again by typing a digit from 1-4");
         }
     }
+    public static void CharectorInput() throws Exception {
+        UserInput newUserInput = new UserInput();
+        final String CharectirselectionInput = Game.getCharectorSelect();
+        if (CharectirselectionInput.equals("1")) {
+            System.out.println("You chose character 1");
+        } else if (CharectirselectionInput.equals("2")) {
+            System.out.println("You chose character 2");
+
+        } else if (CharectirselectionInput.equals("3")) {
+            System.out.println("You chose character 3");
+        } else if (CharectirselectionInput.equals("4")) {
+            System.out.println("You chose character 4");
+        }else if(CharectirselectionInput.equals("5")) {
+            titleInput();
+        }
+        else if(CharectirselectionInput.equals("")) {
+            System.out.println("Thanks for Playing our Game");
+        }
+        else {
+            System.out.println("Wrong input, try again by typing a digit from 1-5");
+        }
+    }
+
 
     public static String getAction() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -93,6 +131,19 @@ public class UserInput {
             userInput.getAction();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void helpInput() throws Exception {
+        System.out.println("Main-Menu (select 1)      Quit(select 2) ");
+        System.out.print(">>>");
+        UserInput newUserInput = new UserInput();
+        final String helpPageInput = Game.getHelpSelect();
+        if (helpPageInput.equals("1")) {
+            titleInput();
+        } else if (helpPageInput.equals("2")) {
+            System.out.println("Thanks for playing");
+
         }
     }
 }
