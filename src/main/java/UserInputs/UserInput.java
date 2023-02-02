@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 import Character.*;
+import ReadExternal.readExternalFiles;
 
 public class UserInput {
     public UserInput() {
@@ -73,7 +74,8 @@ public class UserInput {
     }
 
     private static void JournalInput(CharacterSelect player) throws Exception {
-        System.out.print("Choose from the following options");
+        readExternalFiles.readText("src/main/ExternalFiles/Opening.txt");
+        System.out.println("\nChoose from the following options");
         System.out.println("Vampire  (select 1)      Werwolf (select 2)      Ghost (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         UserInput newUserInput = new UserInput();
         final String JournalselectionInput = Game.getJournalSelect();
