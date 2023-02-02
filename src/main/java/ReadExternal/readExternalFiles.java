@@ -1,3 +1,5 @@
+package ReadExternal;
+
 import java.io.*;
 
 public class readExternalFiles {
@@ -24,7 +26,7 @@ public class readExternalFiles {
             for (int i = 0; i < text.length(); i++) {
                 System.out.printf("%c", text.charAt(i));
                 try {
-                    Thread.sleep(60);//0.5s pause between characters
+                    Thread.sleep(10);//0.5s pause between characters
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }

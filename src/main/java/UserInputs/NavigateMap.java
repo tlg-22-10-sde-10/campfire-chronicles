@@ -1,3 +1,6 @@
+package UserInputs;
+
+import ReadExternal.readExternalFiles;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,9 +21,9 @@ public class NavigateMap {
 
     public static void main(String[] args) throws Exception {
         readExternalFiles read = new readExternalFiles();
-        read.readText("src/main/java/Opening.txt");
+        read.readText("src/main/ExternalFiles/Opening.txt");
 
-        String json = readExternalFiles.getJSONFromFile("src/main/java/map.json");
+        String json = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
 
         try {
             JSONParser parser = new JSONParser();

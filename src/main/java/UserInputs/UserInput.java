@@ -1,3 +1,7 @@
+package UserInputs;
+
+import Game.Game;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +14,7 @@ public class UserInput {
         UserInput newUserInput = new UserInput();
         final String homePageInput = Game.getHomePage();
         if (homePageInput.equals("1")) {
-            System.out.println("New Game has been selected");
+            System.out.println("New Game.Game has been selected");
             newUserInput.getAction();
 
         } else if (homePageInput.equals("2")) {
