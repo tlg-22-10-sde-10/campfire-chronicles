@@ -1,5 +1,5 @@
-[
-  {
+{
+  "1":{
     "name": "Jock",
     "stats": {
       "speed": 3,
@@ -11,7 +11,7 @@
     "item": "baseball bat",
     "description": "Jock is the popular and athletic guy in school. He's confident and competitive, always striving to be the best at everything he does."
   },
-  {
+  "2":{
     "name": "Popular Girl",
     "stats": {
       "speed": 2,
@@ -23,7 +23,7 @@
     "item": "hairpin",
     "description": "The Popular Girl is the queen bee of the school, with a large social circle and lots of admirers. She's charming and fashionable, but can also be petty and shallow at times."
   },
-  {
+  "3":{
     "name": "Band Camp Nerd",
     "stats": {
       "speed": 1,
@@ -35,7 +35,7 @@
     "item": "flashlight",
     "description": "The Band Camp Nerd is a talented musician and a bit of a loner. They're smart and observant, with a strong passion for their craft. Despite their lack of social skills, they have a kind heart and a unique perspective on the world."
   },
-  {
+  "4":{
     "name": "Easy Kid",
     "stats": {
       "speed": 3,
@@ -47,4 +47,4 @@
     "item": "Golden Coin",
     "description": "The Easy Kid is a laid-back and carefree individual. They're charming and adaptable, able to get along with just about anyone. Despite their relaxed demeanor, they have a sharp mind and a talent for problem-solving."
   }
-]
+}

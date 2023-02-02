@@ -137,5 +137,15 @@ public class Game {
         System.out.println("Press 'C' for cheats ");
         UserInput.helpInput();
     }
+
+    public static void inGameHelp() throws Exception {
+        System.out.println(" --- HELP SCREEN ----");
+        System.out.println("Press 'M' for menu screen in the game.");
+        System.out.println("'Yellow' represents the rooms you have unlocked.");
+        System.out.println("'Red' represents the room that you haven't visited.");
+        System.out.println("'Green' represents the room you are in.");
+        System.out.println("Press 'C' for cheats ");
+
+    }
 }
 

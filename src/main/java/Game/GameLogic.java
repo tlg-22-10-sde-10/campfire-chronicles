@@ -29,7 +29,6 @@ public class GameLogic {
     public GameLogic() throws Exception {
     }
 
-
     public static void startGame() throws Exception {
         moveCounter = 10;
 
@@ -38,18 +37,20 @@ public class GameLogic {
             processCommand(command);
         }
         while (gameRunning == true && moveCounter > 0);
+
     }
 
     private static void processCommand(String command) throws Exception {
         switch(command) {
-            case "exit":
+            case "quit":
                 gameRunning = false;
+                System.out.println("Good-Bye!");
                 break;
             case "status":
                 showStatus();
                 break;
             case "help":
-                Game.displayHelp();
+                Game.inGameHelp();
                 break;
             default:
                 if (command.contains("go") || command.contains("move")) {
@@ -59,22 +60,27 @@ public class GameLogic {
                     Navigate(direction);
                 break;
         };
-
-
         }
     }
 
-    private static void Navigate(String direction) throws Exception {
-        moveCounter--;
-        JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-        playerLocation = (JSONObject) jsonObject.get(currentLocation);
-        String destination = (String) playerLocation.get(direction);
-        currentLocation = destination;
-        playerLocation = (JSONObject) jsonObject.get(currentLocation);
-        showStatus();
+    private static void Navigate(String direction) throws NullPointerException {
 
+        try {
+            JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+            playerLocation = (JSONObject) jsonObject.get(currentLocation);
+            String destination = (String) playerLocation.get(direction);
+            if (destination != null) {
+                currentLocation = destination;
+                moveCounter--;
+            }
+            else {throw new NullPointerException();}
+            playerLocation = (JSONObject) jsonObject.get(currentLocation);
+            showStatus();
+
+        } catch (Exception e) {
+            System.out.println("invalid direction");
         }
-
+    }
 
     private static void showStatus() throws Exception {
         playerLocation =  (JSONObject) jsonObject.get(currentLocation);
