@@ -1,3 +1,7 @@
+package Game;
+
+import Game.Game;
+import UserInputs.UserInput;
 
 public class Camp {
     /**
@@ -6,7 +10,7 @@ public class Camp {
      */
     public static void startGame() throws Exception {
         Game.showTitle();
-        UserInput.titleInput();
+
 
     }
 }

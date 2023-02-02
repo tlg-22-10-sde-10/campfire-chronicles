@@ -1,3 +1,5 @@
+package Game;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,7 +21,7 @@ public class Game {
     public static void showTitle() throws Exception {
         //File path is passed as parameter "Bug Figure Out how to open in Github"
 
-        File file = new File("src/main/java/Title.txt");
+        File file = new File("src/main/ExternalFiles/Title.txt");
 
         //Creating an object of BufferedReader class
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -34,7 +36,7 @@ public class Game {
             System.out.println(ANSI_RED + title + ANSI_RESET);
         }
         System.out.println("Please select an option: ");
-        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
+        String text = "\" New Game.Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
@@ -87,7 +89,7 @@ public class Game {
             System.out.println("Go to Home Page (select 2)");
             System.out.println("Close Main Menu (select 3)");
             System.out.println("Help (select 4)");
-            System.out.println("Quit Game (select 5)");
+            System.out.println("Quit Game.Game (select 5)");
             System.out.println("------ Main Menu ------");
         }
         /**
