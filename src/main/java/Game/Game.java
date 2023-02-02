@@ -67,7 +67,7 @@ public class Game {
             String menuInput = SC.next();
             final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5"));
             while (!options.contains(menuInput)) {
-                System.out.println("Invalid input, try again.");
+                System.out.println("Invalid input, try again. valid inputs are 1-5");
                 menuInput = SC.next();
             }
             return menuInput;
@@ -81,7 +81,7 @@ public class Game {
         String charectorinput = SC.next();
         final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5","6"));
         while (!options.contains(charectorinput)) {
-            System.out.println("Invalid input, try again.");
+            System.out.println("Invalid input, try again. valid inputs are 1 to 6");
             charectorinput = SC.next();
         }
         return charectorinput;
@@ -107,7 +107,7 @@ public class Game {
         String helpinput = SC.next();
         final Set<String> options = new HashSet<>(Arrays.asList("1", "2"));
         while (!options.contains(helpinput)) {
-            System.out.println("Invalid input, try again.");
+            System.out.println("Invalid input, try again. valid inputs are 1 and 2");
             helpinput = SC.next();
         }
         return helpinput;
@@ -122,7 +122,7 @@ public class Game {
         String journalinput = SC.next();
         final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5","6"));
         while (!options.contains(journalinput)) {
-            System.out.println("Invalid input, try again.");
+            System.out.println("Invalid input, try again. valid inputs are 1 to 6");
             journalinput = SC.next();
         }
         return journalinput;
@@ -130,21 +130,30 @@ public class Game {
 
     public static void displayHelp() throws Exception {
         System.out.println(" --- HELP SCREEN ----");
-        System.out.println("Press 'M' for menu screen in the game.");
-        System.out.println("'Yellow' represents the rooms you have unlocked.");
-        System.out.println("'Red' represents the room that you haven't visited.");
-        System.out.println("'Green' represents the room you are in.");
-        System.out.println("Press 'C' for cheats ");
+        System.out.println("Main Menu Options");
+        System.out.println("Type 1 to start a New game");
+        System.out.println("Type 2 to get Developer Information");
+        System.out.println("'Type 3 to get to Help screen");
+        System.out.println("Type 4 to Quit the game");
         UserInput.helpInput();
     }
 
     public static void inGameHelp() throws Exception {
         System.out.println(" --- HELP SCREEN ----");
-        System.out.println("Press 'M' for menu screen in the game.");
-        System.out.println("'Yellow' represents the rooms you have unlocked.");
-        System.out.println("'Red' represents the room that you haven't visited.");
-        System.out.println("'Green' represents the room you are in.");
-        System.out.println("Press 'C' for cheats ");
+        System.out.println("Valid Commands - " +
+                "Move\n" +
+                "Hide\n" +
+                "Look\n" +
+                "Use Items\n" +
+                "Talk to\n" +
+                "Give\n" +
+                "Help (Camp Counselor)\n" +
+                "Inventory(viewable)\n" +
+                "Map\n" +
+                "Exit(Give Up)\n");
+        System.out.println("Correct Syntax would be move north" +
+                "Inventory(viewable)\n" + " Developer notes Add more Stuff later ");
+
 
     }
 }

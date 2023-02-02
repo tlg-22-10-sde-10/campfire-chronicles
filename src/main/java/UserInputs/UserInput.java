@@ -35,6 +35,7 @@ public class UserInput {
 
         } else if (homePageInput.equals("2")) {
             System.out.println("Development in progress");
+            UserInput.helpInput();
 
         } else if (homePageInput.equals("3")) {
             Game.displayHelp();
