@@ -31,6 +31,8 @@ public class GameLogic {
 
     public static void startGame() throws Exception {
         moveCounter = 10;
+        System.out.println();
+        ;
 
         do {
             String command = UserInput.getAction();
