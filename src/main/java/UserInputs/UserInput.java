@@ -1,6 +1,6 @@
 package UserInputs;
 
-import Game.Game;
+import Game.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,15 +11,14 @@ public class UserInput {
     public UserInput() {
     }
     public static void titleInput() throws Exception {
-        UserInput newUserInput = new UserInput();
+
         final String homePageInput = Game.getHomePage();
         if (homePageInput.equals("1")) {
-            System.out.println("New Game.Game has been selected");
-            newUserInput.getAction();
-
+            System.out.println("New Game.Game has been selected \n\n");
+            Game.openingText();
+            GameLogic.startGame();
         } else if (homePageInput.equals("2")) {
-            System.out.println("Developement in progress");
-
+            System.out.println("Development in progress");
         } else if (homePageInput.equals("3")) {
             Game.displayHelp();
         } else if (homePageInput.equals("4")) {
@@ -28,23 +27,22 @@ public class UserInput {
         }
     }
 
-    public String getAction() throws IOException {
+    public static String getAction() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         String toParse;
         String action;
-        do {
-            System.out.print("Command: ");
+
+            System.out.print("Enter Command>> ");
             toParse = input.readLine();
             action = parseInput(toParse);
-            System.out.println(action);
 
-        }
-        while (!toParse.equals("quit"));
+
+
 
         return action;
     }
 
-    private String parseInput(String toParse) {
+    private static String parseInput(String toParse) {
         List<String> words = new ArrayList<>();
         String lowerCase = toParse.trim().toLowerCase();
         String output = "you do nothing";
@@ -57,6 +55,9 @@ public class UserInput {
         }
         else if (lowerCase.equals("quit")) {
             output = "Goodbye";
+        }
+        else if (lowerCase.equals("status")) {
+            output = "status";
         }
 
         else {
@@ -72,24 +73,20 @@ public class UserInput {
         }
         return output;
     }
-
-    private String processVerbNoun(List<String> words) {
+    private static String processVerbNoun(List<String> words) {
         String verb = words.get(0);
         String noun = words.get(words.size() - 1);
         String output;
+
         List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go"));
         List<String> objects = new ArrayList<>(Arrays.asList("north", "south", "east", "west", "bat", "drink", "key", ""));
-
-
         if (commands.contains(verb) && objects.contains(noun)) {
             output = verb + " " + noun;
         } else {
             output = "invalid command";
         }
-
         return output;
     }
-
     public static void main(String[] args) {
         UserInput userInput = new UserInput();
         try {

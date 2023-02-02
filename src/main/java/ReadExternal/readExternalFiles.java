@@ -1,9 +1,13 @@
 package ReadExternal;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.*;
 
 public class readExternalFiles {
-    public static String getJSONFromFile(String filename){
+    public static JSONObject getJSONFromFile(String filename) throws Exception {
         String json = "";
         try{
             BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -16,21 +20,24 @@ public class readExternalFiles {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return json;
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(json);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        return jsonObject;
     }
     public static void readText(String filename) throws Exception {
         File file = new File(filename);
         BufferedReader br = new BufferedReader(new FileReader(file));
         String text;
         while ((text = br.readLine())!= null) {
-            for (int i = 0; i < text.length(); i++) {
-                System.out.printf("%c", text.charAt(i));
                 try {
-                    Thread.sleep(10);//0.5s pause between characters
+                    System.out.println(text);
+                    Thread.sleep(500);//0.5s pause between characters
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
-            }
+
         }
     }
 }
