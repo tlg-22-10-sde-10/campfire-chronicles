@@ -57,20 +57,6 @@ public class Game {
 
     }
 
-        /**
-         * This method responsible for getting input the home page
-         * @return String
-         */
-        public static String getHomePage() {
-            String userA = SC.next();
-            final Set<String> set = new HashSet<>(Arrays.asList("1", "2", "3", "4"));
-
-            while (!set.contains(userA)) {
-                System.out.println("Invalid input, try again.");
-                userA = SC.next();
-            }
-            return userA;
-        }
 
         /**
          * This method is responsible for getting input the main screen
@@ -103,18 +89,6 @@ public class Game {
 
 
         /**
-         * Print the main menu.
-         */
-        public static void displayMenuScreen() {
-            System.out.println("------ Main Menu -------");
-            System.out.println("Clues (select 1)");
-            System.out.println("Go to Home Page (select 2)");
-            System.out.println("Close Main Menu (select 3)");
-            System.out.println("Help (select 4)");
-            System.out.println("Quit Game.Game (select 5)");
-            System.out.println("------ Main Menu ------");
-        }
-        /**
          * This will get the player's input
          * @return String
          */
@@ -137,6 +111,21 @@ public class Game {
             helpinput = SC.next();
         }
         return helpinput;
+    }
+
+    /**
+     * This method is responsible for getting input the Journal Screen
+     * [1,2,3,4]
+     * @return String
+     */
+    public static String getJournalSelect() {
+        String journalinput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5","6"));
+        while (!options.contains(journalinput)) {
+            System.out.println("Invalid input, try again.");
+            journalinput = SC.next();
+        }
+        return journalinput;
     }
 
     public static void displayHelp() throws Exception {
