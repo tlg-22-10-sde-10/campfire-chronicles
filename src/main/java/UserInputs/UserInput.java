@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import Character.*;
 
 public class UserInput {
     public UserInput() {
@@ -41,34 +42,37 @@ public class UserInput {
             System.out.println("Wrong input, try again by typing a digit from 1-4");
         }
     }
-    public static void CharectorInput() throws Exception {
+    private static void CharectorInput() throws Exception {
+        CharacterSelect player = null;
         System.out.println("New Game.Game has been selected");
         System.out.println("Character  (select 1)      Character (select 2)      Character (select 3)      Character (select 4)     Back to Main(select 5)   Quit(select 6)");
         UserInput newUserInput = new UserInput();
-        final String CharectirselectionInput = Game.getCharectorSelect();
-        if (CharectirselectionInput.equals("1")) {
+        final String CharectorSelectionInput = Game.getCharectorSelect();
+        if (CharectorSelectionInput.equals("1")) {
             System.out.println("You chose character 1");
-        } else if (CharectirselectionInput.equals("2")) {
+            player = new CharacterSelect("1");
+        } else if (CharectorSelectionInput.equals("2")) {
             System.out.println("You chose character 2");
 
-        } else if (CharectirselectionInput.equals("3")) {
+        } else if (CharectorSelectionInput.equals("3")) {
             System.out.println("You chose character 3");
-        } else if (CharectirselectionInput.equals("4")) {
+        } else if (CharectorSelectionInput.equals("4")) {
             System.out.println("You chose character 4");
-        }else if(CharectirselectionInput.equals("5")) {
+        }else if(CharectorSelectionInput.equals("5")) {
             titleInput();
         }
-        else if(CharectirselectionInput.equals("6")) {
+        else if(CharectorSelectionInput.equals("6")) {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
         }
         else {
             System.out.println("Wrong input, try again by typing a digit from 1-6");
         }
-        JournalInput();
+        JournalInput(player);
+
     }
 
-    public static void JournalInput() throws Exception {
+    private static void JournalInput(CharacterSelect player) throws Exception {
         System.out.print("Choose from the following options");
         System.out.println("Vampire  (select 1)      Werwolf (select 2)      Ghost (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         UserInput newUserInput = new UserInput();
@@ -88,6 +92,7 @@ public class UserInput {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
         }
+        GameLogic.startGame();
     }
 
 
@@ -118,7 +123,7 @@ public class UserInput {
             output = "help";
         }
         else if (lowerCase.equals("quit")) {
-            output = "Goodbye";
+            output = "quit";
         }
         else if (lowerCase.equals("status")) {
             output = "status";
