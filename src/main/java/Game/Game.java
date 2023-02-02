@@ -1,8 +1,13 @@
 package Game;
 
+import ReadExternal.readExternalFiles;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -30,7 +35,7 @@ public class Game {
         String title;
 
 
-        //Condition holds true till there is character in astring
+        //Condition holds true till there is character in a string
         while ((title = br.readLine()) != null) {
 
             System.out.println(ANSI_RED + title + ANSI_RESET);
@@ -46,6 +51,20 @@ public class Game {
                 Thread.currentThread().interrupt();
             }
         }
+
+    }
+
+
+
+
+    public static void openingText() throws Exception {
+        readExternalFiles read = new readExternalFiles();
+        read.readText("src/main/ExternalFiles/Opening.txt");
+
+
+        String curLocation = "campfire";
+        String[] inventory = new String[0];
+        System.out.println("\nCurrent Location: " + curLocation + "\nInventory: " + Arrays.toString(inventory));
 
     }
 
