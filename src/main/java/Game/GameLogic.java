@@ -20,7 +20,6 @@ public class GameLogic {
     public static String desc;
     static JSONObject playerLocation;
     public static JSONObject jsonObject;
-
     static {
         try {
             jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
@@ -36,14 +35,13 @@ public class GameLogic {
         moveCounter = 10;
         inventoryList.add(inventory);
         System.out.println();
-        ;
-
+        Game.inGameHelp();
+        System.out.println();
         do {
             String command = UserInput.getAction();
             processCommand(command);
         }
         while (gameRunning == true && moveCounter > 0);
-
     }
 
     private static void processCommand(String command) throws Exception {
@@ -70,7 +68,6 @@ public class GameLogic {
     }
 
     private static void Navigate(String direction) throws NullPointerException {
-
         try {
             JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
             playerLocation = (JSONObject) jsonObject.get(currentLocation);
@@ -82,7 +79,6 @@ public class GameLogic {
             else {throw new NullPointerException();}
             playerLocation = (JSONObject) jsonObject.get(currentLocation);
             showStatus();
-
         } catch (Exception e) {
             System.out.println("invalid direction");
         }
@@ -91,7 +87,6 @@ public class GameLogic {
     private static void showStatus() throws Exception {
         playerLocation =  (JSONObject) jsonObject.get(currentLocation);
         desc = (String) playerLocation.get("description");
-
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
         System.out.println("Description: " + desc);

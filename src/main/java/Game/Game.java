@@ -2,13 +2,10 @@ package Game;
 
 import ReadExternal.readExternalFiles;
 import UserInputs.UserInput;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -22,41 +19,26 @@ public class Game {
     private static final char CHEAT = 'C';
     private static final char QUIT_OPTION = 'Q';
 
-
-
     public static void showTitle() throws Exception {
         //File path is passed as parameter "Bug Figure Out how to open in Github"
-
         File file = new File("src/main/ExternalFiles/Title.txt");
-
         //Creating an object of BufferedReader class
         BufferedReader br = new BufferedReader(new FileReader(file));
-
         //Declaring a string variable
         String title;
-
-
         //Condition holds true till there is character in a string
         while ((title = br.readLine()) != null) {
-
             System.out.println(ANSI_RED + title + ANSI_RESET);
         }
     }
 
-
-
-
     public static void openingText() throws Exception {
         readExternalFiles read = new readExternalFiles();
         read.readText("src/main/ExternalFiles/Opening.txt");
-
-
         String curLocation = "campfire";
         String[] inventory = new String[0];
         System.out.println("\nCurrent Location: " + curLocation + "\nInventory: " + Arrays.toString(inventory));
-
     }
-
 
         /**
          * This method is responsible for getting input the main screen
@@ -65,9 +47,9 @@ public class Game {
          */
         public static String getMainMenu() {
             String menuInput = SC.next();
-            final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5"));
+            final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4"));
             while (!options.contains(menuInput)) {
-                System.out.println("Invalid input, try again. valid inputs are 1-5");
+                System.out.println("Invalid input, try again. valid inputs are 1-4");
                 menuInput = SC.next();
             }
             return menuInput;
@@ -77,7 +59,7 @@ public class Game {
      * [1,2,3,4]
      * @return String
      */
-    public static String getCharectorSelect() {
+    public static String getCharacterSelect() {
         String charectorinput = SC.next();
         final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4","5","6"));
         while (!options.contains(charectorinput)) {
@@ -86,7 +68,6 @@ public class Game {
         }
         return charectorinput;
     }
-
 
         /**
          * This will get the player's input
@@ -140,19 +121,15 @@ public class Game {
 
     public static void inGameHelp() throws Exception {
         System.out.println(" --- HELP SCREEN ----");
-        System.out.println("Valid Commands - " +
-                "Move\n" +
-                "Hide\n" +
+        System.out.println("Valid Commands -\n" +
+                "Move/go\n" +
                 "Look\n" +
                 "Use Items\n" +
-                "Talk to\n" +
-                "Give\n" +
                 "Help (Camp Counselor)\n" +
-                "Inventory(viewable)\n" +
-                "Map\n" +
-                "Exit(Give Up)\n");
-        System.out.println("Correct Syntax would be move north" +
-                "Inventory(viewable)\n" + " Developer notes Add more Stuff later ");
+                "Status(show location/inventory)\n" +
+                "quit(Give Up)\n");
+        System.out.println("Correct Syntax would be move north/south/east/west\n"
+                 + " Developer notes Add more Stuff later ");
 
 
     }
