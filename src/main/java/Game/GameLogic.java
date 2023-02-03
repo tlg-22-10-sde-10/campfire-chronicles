@@ -13,6 +13,8 @@ import Character.*;
 
 public class GameLogic {
     public static boolean gameRunning = true;
+    public static boolean gameWin = false;
+    public static boolean gameLose = false;
     public static int moveCounter;
     public static String currentLocation = "campfire";
     //public static String[] inventory;
@@ -41,7 +43,16 @@ public class GameLogic {
             String command = UserInput.getAction();
             processCommand(command);
         }
-        while (gameRunning == true && moveCounter > 0);
+        while (gameRunning == true );
+        System.out.println();
+        if (gameWin == true) {
+            System.out.println("congrats! You Win!!");
+            System.out.println("Thank you for playing,\n" +
+                    "stay tuned for sprint 2 where the main character is challenged by the terrible monsters");
+        }
+        else if (gameLose == true) {
+            System.out.println("Sorry! You Lose!!");
+        }
     }
 
     private static void processCommand(String command) throws Exception {
@@ -68,20 +79,27 @@ public class GameLogic {
     }
 
     private static void Navigate(String direction) throws NullPointerException {
+        String destination = null;
         try {
             JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
             playerLocation = (JSONObject) jsonObject.get(currentLocation);
-            String destination = (String) playerLocation.get(direction);
+            destination = (String) playerLocation.get(direction);
             if (destination != null) {
                 currentLocation = destination;
                 moveCounter--;
+            } else {
+                throw new NullPointerException();
             }
-            else {throw new NullPointerException();}
             playerLocation = (JSONObject) jsonObject.get(currentLocation);
+            if (destination.equals("lake")) {
+                gameRunning = false;
+                gameWin = true;
+            }
             showStatus();
         } catch (Exception e) {
             System.out.println("invalid direction");
         }
+
     }
 
     private static void showStatus() throws Exception {
