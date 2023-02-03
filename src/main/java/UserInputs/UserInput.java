@@ -14,7 +14,7 @@ public class UserInput {
     }
     public static void titleInput() throws Exception {
         System.out.println("Please select an option: ");
-        String text = "\" New Game.Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
+        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
@@ -45,20 +45,23 @@ public class UserInput {
     }
     private static void CharectorInput() throws Exception {
         CharacterSelect player = null;
-        System.out.println("New Game.Game has been selected");
-        System.out.println("Character  (select 1)      Character (select 2)      Character (select 3)      Character (select 4)     Back to Main(select 5)   Quit(select 6)");
+        String inventory = null;
+        System.out.println("New Game has been selected");
+        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Easy Kid (select 4)     Back to Main(select 5)   Quit(select 6)");
         UserInput newUserInput = new UserInput();
         final String CharectorSelectionInput = Game.getCharectorSelect();
         if (CharectorSelectionInput.equals("1")) {
-            System.out.println("You chose character 1");
             player = new CharacterSelect("1");
+            inventory = player.getInventory("1");
         } else if (CharectorSelectionInput.equals("2")) {
-            System.out.println("You chose character 2");
-
+            player = new CharacterSelect("2");
+            inventory = player.getInventory("2");
         } else if (CharectorSelectionInput.equals("3")) {
-            System.out.println("You chose character 3");
+            player = new CharacterSelect("3");
+            inventory = player.getInventory("3");
         } else if (CharectorSelectionInput.equals("4")) {
-            System.out.println("You chose character 4");
+            player = new CharacterSelect("4");
+            inventory = player.getInventory("4");
         }else if(CharectorSelectionInput.equals("5")) {
             titleInput();
         }
@@ -69,22 +72,22 @@ public class UserInput {
         else {
             System.out.println("Wrong input, try again by typing a digit from 1-6");
         }
-        JournalInput(player);
+        JournalInput(inventory);
 
     }
 
-    private static void JournalInput(CharacterSelect player) throws Exception {
+    private static void JournalInput(String inventory) throws Exception {
         readExternalFiles.readText("src/main/ExternalFiles/Opening.txt");
-        System.out.println("\nChoose from the following options");
-        System.out.println("Vampire  (select 1)      Werwolf (select 2)      Ghost (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
+        System.out.println("\nYou pick to read:");
+        System.out.println("Red Journal  (select 1)      Brown Journal (select 2)      Blue Journal (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         UserInput newUserInput = new UserInput();
         final String JournalselectionInput = Game.getJournalSelect();
         if (JournalselectionInput.equals("1")) {
-            System.out.println("You chose option 1 Vampire journal ");
+            System.out.println("Suddenly, as you flip through the pages, a swarm of bats flew out of the journal, swarming all around you.\n In the midst of the chaos, a figure appeared, shrouded in darkness. A Vampire has appeared.");
         } else if (JournalselectionInput.equals("2")) {
-            System.out.println("You chose option 2 Werewolf journal ");
+            System.out.println("When you open the journal and hear a howl that echoes through the forest, bouncing off the trees and lingering in the air long after the sound has died down.\n Suddenly a large figure emerges from the shadow. Its fur standing on end and its eyes glowing in the dark. A Werewolf has appeared.");
         } else if (JournalselectionInput.equals("3")) {
-            System.out.println("You chose option 3 Ghost journal ");
+            System.out.println("As you open the journal two translucent hands reach out to grab you. You dropped the journal and watch a ghostly figure emerge from the journal and take shape before you eyes. A Ghost has appeared");
         } else if (JournalselectionInput.equals("4")) {
         CharectorInput();
         }
@@ -94,7 +97,7 @@ public class UserInput {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
         }
-        GameLogic.startGame();
+        GameLogic.startGame(inventory);
     }
 
 
