@@ -7,13 +7,16 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import Character.*;
 
 public class GameLogic {
     public static boolean gameRunning = true;
     public static int moveCounter;
     public static String currentLocation = "campfire";
-    public static String[] inventory;
+    //public static String[] inventory;
+    public static ArrayList<String> inventoryList = new ArrayList<String>();
     public static String desc;
     static JSONObject playerLocation;
     public static JSONObject jsonObject;
@@ -29,8 +32,9 @@ public class GameLogic {
     public GameLogic() throws Exception {
     }
 
-    public static void startGame() throws Exception {
+    public static void startGame(String inventory) throws Exception {
         moveCounter = 10;
+        inventoryList.add(inventory);
         System.out.println();
         ;
 
@@ -91,7 +95,7 @@ public class GameLogic {
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
         System.out.println("Description: " + desc);
-        System.out.println("Inventory: " + Arrays.toString(inventory));
+        System.out.println("Inventory: " + inventoryList.toString());
         System.out.println("Moves: " + moveCounter);
     }
 }
