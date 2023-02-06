@@ -10,6 +10,7 @@ import Character.*;
 import ReadExternal.readExternalFiles;
 
 public class UserInput {
+
     public UserInput() {
     }
     public static void titleInput() throws Exception {
@@ -39,6 +40,8 @@ public class UserInput {
             Game.displayHelp();
         }
         else if (homePageInput.equals("4")) {
+            System.out.println("Thanks for playing the game");
+            System.exit(0);
         }
         else {System.out.println("Wrong input, try again by typing a digit from 1-4");}
     }
@@ -170,5 +173,19 @@ public class UserInput {
             System.out.println("Thanks for playing");
 
         }
+    }
+    public static boolean quitInput() throws Exception {
+        System.out.println("Are you Sure You want to Quit");
+        System.out.println(" Select 1 for Yes and 2 for No");
+        System.out.print(">>> ");
+        UserInput newUserInput = new UserInput();
+        final String quitPageInput = Game.getQuitSelect();
+        if (quitPageInput.equals("1")) {
+            System.exit(0);
+        }
+        else if (quitPageInput.equals("2")) {
+            return true;
+        }
+        return false;
     }
 }
