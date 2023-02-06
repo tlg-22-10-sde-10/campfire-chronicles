@@ -66,6 +66,9 @@ public class GameLogic {
             case "help":
                 Game.inGameHelp();
                 break;
+            case "map":
+                readExternalFiles.readText("src/main/ExternalFiles/map.txt");
+                break;
             default:
                 if (command.contains("go") || command.contains("move")) {
                     command = command.replace("go", "move");
@@ -87,6 +90,10 @@ public class GameLogic {
                 } else if (command.contains("search")) {
                     System.out.println("you take a look around");
                     SearchRoom();
+                    break;
+
+                }else if (command.contains("map")) {
+                    readExternalFiles.readText("src/main/ExternalFiles/map.txt");
                     break;
 
                 }
@@ -166,6 +173,9 @@ public class GameLogic {
             System.out.println("Description: " + desc);
             System.out.println("Inventory: " + inventoryList.toString());
             System.out.println("Moves: " + moveCounter);
+        }
+        private static void showMap() throws Exception {
+        readExternalFiles.readText("src/main/ExternalFiles/map.txt");
         }
     }
 

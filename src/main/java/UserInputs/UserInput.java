@@ -136,6 +136,9 @@ public class UserInput {
         else if (lowerCase.equals("status")) {
             output = "status";
         }
+        else if (lowerCase.equals("map")) {
+            output = "map";
+        }
         else {
             String delimins = " ,.:;!?|\"";
             StringTokenizer tokenizer = new StringTokenizer(lowerCase, delimins);
