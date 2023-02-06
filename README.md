@@ -43,7 +43,7 @@ Initial design process
 
 [figma Link](https://www.figma.com/file/EYMSSgMPCudxBmRRnmBtvs/Adventure-Game?node-id=0%3A1&t=eY64dArFbdBXfSFw-0)
 
-Game.Game Information
+Game.GameScreens Information
 
 [canva Link](https://www.canva.com/design/DAFZKoEjsqc/RrrmVp33DwRT0HRdKuflDQ/edit)
 
