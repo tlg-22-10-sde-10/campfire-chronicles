@@ -1,0 +1,12 @@
+{
+  "bat": {
+    "description": "made of wood",
+    "correct_use": "you swing the bat, wow something really cool happens!!",
+    "incorrect_use": "you swing the bat... nothing happens"
+  },
+  "flashlight": {
+    "description": "the batteries are good i hope",
+    "correct_use": "Wow you can see everything",
+    "incorrect_use": "the flashlight cant be use right now"
+  }
+}
