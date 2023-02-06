@@ -1,6 +1,6 @@
   -------------         -------------        -------------        -------------
  |             |       |             |      |             |      |             |
- |  Infirmary  | W ↔ E |  Cafeteria  |W ↔ E | Boy's Cabin |W ↔ E |Girl's Cabin |
+ |  Infirmary  | W ↔ E |  Cafeteria  |W ↔ E | Boy's Cabin |W ↔ E | Girl's Cabin|
  |             |       |             |      |             |      |             |
   -------------         -------------        -------------        -------------
         N                     N                    N                    N
