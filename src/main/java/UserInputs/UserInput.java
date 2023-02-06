@@ -26,7 +26,7 @@ public class UserInput {
             }
         }
         System.out.print(">>> ");
-        UserInput newUserInput = new UserInput();
+
         final String homePageInput = Game.getMainMenu();
         if (homePageInput.equals("1")) {
             UserInput.CharectorInput();
@@ -47,7 +47,7 @@ public class UserInput {
         String inventory = null;
         System.out.println("New Game has been selected");
         System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Easy Kid (select 4)     Back to Main(select 5)   Quit(select 6)");
-        UserInput newUserInput = new UserInput();
+//        UserInput newUserInput = new UserInput();
         System.out.print(">>> ");
         final String CharectorSelectionInput = Game.getCharacterSelect();
         if (CharectorSelectionInput.equals("1")) {
@@ -149,9 +149,8 @@ public class UserInput {
         String verb = words.get(0);
         String noun = words.get(words.size() - 1);
         String output;
-        List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go"));
-        List<String> objects = new ArrayList<>(Arrays.asList("north", "south", "east", "west", "bat", "drink", "key", ""));
-        if (commands.contains(verb) && objects.contains(noun)) {
+        List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go", "search"));
+                if (commands.contains(verb)) {
             output = verb + " " + noun;
         } else {
             output = "invalid command";
