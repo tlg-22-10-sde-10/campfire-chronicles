@@ -56,8 +56,9 @@ public class GameLogic {
     private static void processCommand(String command) throws Exception {
         switch (command) {
             case "quit":
-                gameRunning = false;
-                System.out.println("Good-Bye!");
+                UserInput.quitInput();
+//                gameRunning = false;
+//                System.out.println("Good-Bye!");
                 break;
             case "status":
                 showStatus();
