@@ -1,6 +1,6 @@
   -------------         -------------        -------------        -------------
  |             |       |             |      |             |      |             |
- |  Infirmary  | W ↔ E |  Cafeteria  |W ↔ E | Boy's Cabin |W ↔ E | Girl's Cabin|
+ |  infirmary  | W ↔ E |  cafeteria  |W ↔ E | boy's cabin |W ↔ E | girl's cabin|
  |             |       |             |      |             |      |             |
   -------------         -------------        -------------        -------------
         N                     N                    N                    N
@@ -8,7 +8,7 @@
         S                     S                    S                    S
   -------------         -------------         -------------         -------------         -------------
  |             |       |             |       |             |       |             |       |             |
- |    Gym      | W ↔ E |    Office   | W ↔ E |   Campfire  | W ↔ E |    Woods    | W ↔ E |    Lake     |
+ |    gym      | W ↔ E |    office   | W ↔ E |   campfire  | W ↔ E |    woods    | W ↔ E |    lake     |
  |             |       |             |       |             |       |             |       |             |
   -------------         -------------         -------------         -------------         -------------
                               N                                           N
@@ -16,6 +16,6 @@
                               S                                           S
                         -------------                               -------------                
                        |             |                             |             |             North 
-                       | School Bus  |                             |  Log Cabin  |         West 🧭 East   
+                       | school bus  |                             |  log cabin  |         West 🧭 East
                        |             |                             |             |             South
                         -------------                               -------------             
