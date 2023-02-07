@@ -1,12 +1,11 @@
-package ReadExternal;
+package read_external;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 
-public class readExternalFiles {
+public class ReadExternalFiles {
     public static JSONObject getJSONFromFile(String filename) throws Exception {
         String json = "";
         try{

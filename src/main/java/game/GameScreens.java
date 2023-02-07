@@ -1,11 +1,8 @@
-package Game;
+package game;
 
-import ReadExternal.readExternalFiles;
-import UserInputs.UserInput;
+import user_Inputs.UserInput;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -22,16 +19,24 @@ public class GameScreens {
 
     /* shows the game tile screen and options */
     public static void showTitle() throws Exception {
-        //File path is passed as parameter "Bug Figure Out how to open in GitHub"
-        File file = new File("src/main/ExternalFiles/Title.txt");
-        //Creating an object of BufferedReader class
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        //Declaring a string variable
-        String title;
-        //Condition holds true till there is character in a string
-        while ((title = br.readLine()) != null) {
-            System.out.println(ANSI_RED + title + ANSI_RESET);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("Title.txt")))){
+            String title;
+            //Condition holds true till there is character in a string
+            while ((title = reader.readLine()) != null) {
+                System.out.println(ANSI_RED + title + ANSI_RESET);
+            }
         }
+
+//        //File path is passed as parameter "Bug Figure Out how to open in GitHub"
+//        File file = new File("src/main/ExternalFiles/Title.txt");
+//        //Creating an object of BufferedReader class
+//        BufferedReader br = new BufferedReader(new FileReader(file));
+//        //Declaring a string variable
+//        String title;
+//        //Condition holds true till there is character in a string
+//        while ((title = br.readLine()) != null) {
+//            System.out.println(ANSI_RED + title + ANSI_RESET);
+//        }
     }
 
     /* prints the context of the opening.txt */
