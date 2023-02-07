@@ -135,5 +135,29 @@ public class GameScreens {
 
 
     }
+//
+//    public static void quitOption() throws Exception {
+//        System.out.println("Are you Sure You want to Quit");
+//        System.out.println(" Select 1 for Yes and 2 for No");
+//        UserInput.quitInput();
+//    }
+
+
+    /**
+     * This method is responsible for getting input the Help Screen
+     * [1,2]
+     * @return String
+     */
+    public static String getQuitSelect() {
+        String quitinput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2"));
+        while (!options.contains(quitinput)) {
+            System.out.println("Invalid input, try again. valid inputs are 1 and 2");
+            quitinput = SC.next();
+        }
+        return quitinput;
+    }
 }
+
+
 
