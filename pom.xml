@@ -16,7 +16,7 @@
   TODO: Replace "project" in the <artifactId> element with a spinal-case (lower-case, with dashes
    between words) version of the project name, without any quotes.
   -->
-  <artifactId>project</artifactId>
+  <artifactId>campfire-chronicles</artifactId>
 
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -40,7 +40,7 @@
     TODO: Replace "replace.me.project.Main" with the fully qualified class name of the project's main class,
      without any quotes, as the content of the <main-class.name> element.
     -->
-    <main-class.name>replace.me.project.Main</main-class.name>
+    <main-class.name>game.StartGame</main-class.name>
 
   </properties>
 
@@ -66,10 +66,16 @@
       <version>1.1</version>
     </dependency>
 
-<!--
-    To use JUnit4 instead of JUnit5, comment out the previous 2 dependency elements and uncomment
-    the following 2 elements.
--->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
+
+    <!--
+        To use JUnit4 instead of JUnit5, comment out the previous 2 dependency elements and uncomment
+        the following 2 elements.
+    -->
 <!--
     <dependency>
       <groupId>junit</groupId>

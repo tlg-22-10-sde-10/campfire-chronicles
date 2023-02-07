@@ -1,12 +1,13 @@
-package Game;
+package game;
 
 //import UserInputs.NavigateMap;
-import UserInputs.UserInput;
+import user_Inputs.UserInput;
+import character.CharacterSelect;
 
 public class StartGame {
     public static void main(String[] args) throws Exception {
-
-        Game.showTitle();
+        CharacterSelect.getCharacterMap();
+        GameScreens.showTitle();
         UserInput.titleInput();
 
     }

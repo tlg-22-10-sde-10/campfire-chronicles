@@ -1,17 +1,14 @@
-package Game;
+package game;
 
-import ReadExternal.readExternalFiles;
-import UserInputs.UserInput;
+import user_Inputs.UserInput;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Game {
+public class GameScreens {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     private static final Scanner SC = new Scanner(System.in);
@@ -19,41 +16,52 @@ public class Game {
     private static final char CHEAT = 'C';
     private static final char QUIT_OPTION = 'Q';
 
+
+    /* shows the game tile screen and options */
     public static void showTitle() throws Exception {
-        //File path is passed as parameter "Bug Figure Out how to open in Github"
-        File file = new File("src/main/ExternalFiles/Title.txt");
-        //Creating an object of BufferedReader class
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        //Declaring a string variable
-        String title;
-        //Condition holds true till there is character in a string
-        while ((title = br.readLine()) != null) {
-            System.out.println(ANSI_RED + title + ANSI_RESET);
-        }
-    }
-
-    public static void openingText() throws Exception {
-        readExternalFiles read = new readExternalFiles();
-        read.readText("src/main/ExternalFiles/Opening.txt");
-        String curLocation = "campfire";
-        String[] inventory = new String[0];
-        System.out.println("\nCurrent Location: " + curLocation + "\nInventory: " + Arrays.toString(inventory));
-    }
-
-        /**
-         * This method is responsible for getting input the main screen
-         * [1,2,3,4]
-         * @return String
-         */
-        public static String getMainMenu() {
-            String menuInput = SC.next();
-            final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4"));
-            while (!options.contains(menuInput)) {
-                System.out.println("Invalid input, try again. valid inputs are 1-4");
-                menuInput = SC.next();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("Title.txt")))){
+            String title;
+            //Condition holds true till there is character in a string
+            while ((title = reader.readLine()) != null) {
+                System.out.println(ANSI_RED + title + ANSI_RESET);
             }
-            return menuInput;
         }
+
+//        //File path is passed as parameter "Bug Figure Out how to open in GitHub"
+//        File file = new File("src/main/ExternalFiles/Title.txt");
+//        //Creating an object of BufferedReader class
+//        BufferedReader br = new BufferedReader(new FileReader(file));
+//        //Declaring a string variable
+//        String title;
+//        //Condition holds true till there is character in a string
+//        while ((title = br.readLine()) != null) {
+//            System.out.println(ANSI_RED + title + ANSI_RESET);
+//        }
+    }
+
+    /* prints the context of the opening.txt */
+//    public static void openingText() throws Exception {
+//        readExternalFiles read = new readExternalFiles();
+//        read.readText("src/main/ExternalFiles/Opening.txt");
+//        String curLocation = "campfire";
+//        String[] inventory = new String[0];
+//        System.out.println("\nCurrent Location: " + curLocation + "\nInventory: " + Arrays.toString(inventory));
+//    }
+    /**
+     * This method is responsible for getting input the main screen
+     * [1,2,3,4]
+     * @return String
+     */
+    public static String getMainMenu() {
+        String menuInput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", ""));
+        while (!options.contains(menuInput)) {
+            System.out.println("Invalid input, try again. valid inputs are 1-4");
+            menuInput = SC.next();
+        }
+        return menuInput;
+
+    }
     /**
      * This method is responsible for getting input the main screen
      * [1,2,3,4]
@@ -69,16 +77,15 @@ public class Game {
         return charectorinput;
     }
 
-        /**
-         * This will get the player's input
-         * @return String
-         */
-        public static String getUserInput() {
-            System.out.println("Your Answer:");
-            final String userA = SC.next();
-            return userA.toLowerCase();
-        }
-
+//    /**
+//     * This will get the player's input
+//     * @return String
+//     */
+//    public static String getUserInput() {
+//        System.out.println("Your Answer:");
+//        final String userA = SC.next();
+//        return userA.toLowerCase();
+//    }
     /**
      * This method is responsible for getting input the Help Screen
      * [1,2]
@@ -133,5 +140,29 @@ public class Game {
 
 
     }
+//
+//    public static void quitOption() throws Exception {
+//        System.out.println("Are you Sure You want to Quit");
+//        System.out.println(" Select 1 for Yes and 2 for No");
+//        UserInput.quitInput();
+//    }
+
+
+    /**
+     * This method is responsible for getting input the Help Screen
+     * [1,2]
+     * @return String
+     */
+    public static String getQuitSelect() {
+        String quitinput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2"));
+        while (!options.contains(quitinput)) {
+            System.out.println("Invalid input, try again. valid inputs are 1 and 2");
+            quitinput = SC.next();
+        }
+        return quitinput;
+    }
 }
+
+
 

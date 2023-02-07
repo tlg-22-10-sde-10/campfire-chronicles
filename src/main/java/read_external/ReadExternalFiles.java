@@ -1,12 +1,11 @@
-package ReadExternal;
+package read_external;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 
-public class readExternalFiles {
+public class ReadExternalFiles {
     public static JSONObject getJSONFromFile(String filename) throws Exception {
         String json = "";
         try{
@@ -33,7 +32,7 @@ public class readExternalFiles {
         while ((text = br.readLine())!= null) {
                 try {
                     System.out.println(text);
-                    Thread.sleep(500);//0.5s pause between characters
+                    Thread.sleep(5);//0.5s pause between characters
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
