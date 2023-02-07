@@ -1,15 +1,14 @@
-package Game;
+package game;
 
-import ReadExternal.readExternalFiles;
-import UserInputs.UserInput;
+import read_external.ReadExternalFiles;
+import user_Inputs.UserInput;
 import org.json.simple.JSONObject;
-import Character.*;
+import character.*;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.StringTokenizer;
 
 public class GameLogic {
@@ -94,7 +93,7 @@ public class GameLogic {
     private static void Navigate(String direction) throws NullPointerException {
         String destination = null;
         try {
-            JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
             jsonObject = (JSONObject) jsonObject.get(currentLocation);
             destination = (String) jsonObject.get(direction);
 
@@ -117,7 +116,7 @@ public class GameLogic {
 
     /* useItem() checks if item is in inventory and sends to doItemAction() to check use case */
     private static void useItem(String item) throws Exception {
-        JSONObject itemDetail = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
+        JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
         itemDetail = (JSONObject) itemDetail.get(item);
         for (int i = 0; i < inventoryList.size(); i++) {
             if (inventoryList.get(i).contains(item)) {
@@ -190,7 +189,7 @@ public class GameLogic {
 
     /* checks if item is in inventory and prints description */
     private static void LookItem(String item) throws Exception {
-        JSONObject itemDetail = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
+        JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
         itemDetail = (JSONObject) itemDetail.get(item);
         int j = inventoryList.size();
         for (int i = 0; i < inventoryList.size(); i++) {
@@ -219,7 +218,7 @@ public class GameLogic {
             System.out.println("the flashlight was used in the search");
         }
         try {
-            JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
             jsonObject = (JSONObject) jsonObject.get(currentLocation);
             items = (String) jsonObject.get("item");
             String delimin = ",";
@@ -243,7 +242,7 @@ public class GameLogic {
     }
 
     public static void showStatus () throws Exception {
-        JSONObject jsonObject = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+        JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
         jsonObject = (JSONObject) jsonObject.get(currentLocation);
         String desc = (String) jsonObject.get("description");
         System.out.println("--------------------------------");
