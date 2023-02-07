@@ -58,6 +58,10 @@ public class CharacterSelect {
 
     }
 
+    public String getInventory() {
+        return inventory;
+    }
+
     public String getInventory(String selection) {
         Map characterSelect = (Map) jsonObject.get(selection);
         this.inventory = (String) characterSelect.get("item");

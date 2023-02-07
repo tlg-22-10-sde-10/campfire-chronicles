@@ -33,7 +33,7 @@ public class readExternalFiles {
         while ((text = br.readLine())!= null) {
                 try {
                     System.out.println(text);
-                    Thread.sleep(500);//0.5s pause between characters
+                    Thread.sleep(5);//0.5s pause between characters
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
