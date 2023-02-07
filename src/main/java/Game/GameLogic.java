@@ -4,11 +4,18 @@ import ReadExternal.readExternalFiles;
 import UserInputs.UserInput;
 import org.json.simple.JSONObject;
 import Character.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.StringTokenizer;
 
 public class GameLogic {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_Green = "\u001B[32m";
+    public static final String ANSI_Blue = "\\u001B[34m";
     public static boolean gameRunning = true;
     public static boolean gameWin = false;
     public static boolean gameLose = false;
@@ -58,8 +65,9 @@ public class GameLogic {
     /* sends in game command to appropriate function */
     private static void processCommand(String command) throws Exception {
         if (command == "quit") {
-            gameRunning = false;
-            System.out.println("Good-Bye!");
+            //gameRunning = false;
+            //System.out.println("Good-Bye!");
+            UserInput.quitInput();
         } else if (command.contains("go") || command.contains("move")) {
             command = command.replace("go", "move");
             String direction = command.replace("move", "").trim();
@@ -76,6 +84,9 @@ public class GameLogic {
         } else if (command.contains("search")) {
             System.out.println("you take a look around");
             SearchRoom();
+        }else if (command.contains("map")) {
+            showMap(currentLocation);
+
         }
     }
 
@@ -238,7 +249,22 @@ public class GameLogic {
 
     }
 
+    private static void showMap(String location) throws Exception {
+        File file = new File("src/main/ExternalFiles/map.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = br.readLine()) != null) {
+            int index = line.indexOf(location);
+            if (index != -1) {
+                System.out.print(line.substring(0, index));   //man-walking   //skull  ☠ 🕱
+                System.out.print(ANSI_Green + location + "\uD83D\uDEB6" + ANSI_RESET);
+                System.out.println(line.substring(index + location.length()));
+            } else {
+                System.out.println(line);
+            }
+        }
 
+    }
 }
 
 
