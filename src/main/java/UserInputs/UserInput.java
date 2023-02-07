@@ -139,7 +139,11 @@ public class UserInput {
             showStatus();
             output = "status";
             return output;
-        } else {
+        }else if (lowerCase.equals("map")) {
+            output = "map";
+            return output;
+        }
+        else {
             String delimins = " ,.:;!?|\"";
             StringTokenizer tokenizer = new StringTokenizer(lowerCase, delimins);
             String word;
@@ -157,7 +161,7 @@ public class UserInput {
         String verb = words.get(0);
         String noun = words.get(words.size() - 1);
         String output;
-        List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go", "search"));
+        List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go", "search", "map"));
         if (commands.contains(verb)) {
             output = verb + " " + noun;
         } else {
@@ -165,5 +169,17 @@ public class UserInput {
         }
         return output;
     }
+    public static boolean quitInput() throws Exception {
+        System.out.println("Are you Sure You want to Quit");
+        System.out.println(" Select 1 for Yes and 2 for No");
+        System.out.print(">>> ");
+        UserInput newUserInput = new UserInput();
+        final String quitPageInput = GameScreens.getQuitSelect();
+        if (quitPageInput.equals("1")) {
+            System.out.println("Thanks for Playing our Game");
+            System.exit(0);
+        }    else if (quitPageInput.equals("2")) {
+            return true;    }
+        return false;}
 
 }
