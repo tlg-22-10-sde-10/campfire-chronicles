@@ -4,12 +4,17 @@ import ReadExternal.readExternalFiles;
 import UserInputs.UserInput;
 import org.json.simple.JSONObject;
 
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 public class GameLogic {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_Green = "\u001B[32m";
+    public static final String ANSI_Blue = "\\u001B[34m";
     public static boolean gameRunning = true;
     public static boolean gameWin = false;
     public static boolean gameLose = false;
@@ -67,7 +72,7 @@ public class GameLogic {
                 Game.inGameHelp();
                 break;
             case "map":
-                readExternalFiles.readText("src/main/ExternalFiles/map.txt");
+                showMap(currentLocation);
                 break;
             default:
                 if (command.contains("go") || command.contains("move")) {
@@ -93,7 +98,7 @@ public class GameLogic {
                     break;
 
                 }else if (command.contains("map")) {
-                    readExternalFiles.readText("src/main/ExternalFiles/map.txt");
+                    showMap(currentLocation);
                     break;
 
                 }
@@ -174,8 +179,21 @@ public class GameLogic {
             System.out.println("Inventory: " + inventoryList.toString());
             System.out.println("Moves: " + moveCounter);
         }
-        private static void showMap() throws Exception {
-        readExternalFiles.readText("src/main/ExternalFiles/map.txt");
+        private static void showMap(String location) throws Exception {
+            File file = new File("src/main/ExternalFiles/map.txt");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = br.readLine()) != null) {
+               int index = line.indexOf(location);
+               if (index!= -1) {
+                   System.out.print(line.substring(0, index));   //man-walking   //skull  ☠ 🕱
+                   System.out.print(ANSI_Green + location + "\uD83D\uDEB6"+ ANSI_RESET);
+                   System.out.println(line.substring(index + location.length()));
+               }else {
+                   System.out.println(line);
+               }
+                }
+
         }
     }
 
