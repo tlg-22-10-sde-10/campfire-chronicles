@@ -27,5 +27,18 @@
     "description": "a fresh pack of batteries",
     "correct_use": "flashlight battery power +++",
     "incorrect_use": "those are no good to you",
-    "action": "power_up"}
+    "action": "power_up"
+  },
+  "gasoline": {
+    "description": "this looks like it could be used to power som sort of vehicle",
+    "correct_use": "you replace the bus battery, gas it up, and drive off into the sunset",
+    "incorrect_use": "this looks like it could be used to power som sort of vehicle",
+    "action": "bus"
+  },
+  "battery": {
+    "description": "this looks like it could be used to power som sort of vehicle",
+    "correct_use": "you replace the bus battery, gas it up, and drive off into the sunset",
+    "incorrect_use": "this looks like it could be used to power som sort of vehicle",
+    "action": "bus"
+  }
 }

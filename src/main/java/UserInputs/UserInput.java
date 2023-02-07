@@ -8,6 +8,7 @@ import java.util.*;
 import Character.*;
 import ReadExternal.readExternalFiles;
 
+
 import static Game.GameScreens.inGameHelp;
 import static Game.GameLogic.showStatus;
 
@@ -127,6 +128,7 @@ public class UserInput {
         String lowerCase = toParse.trim().toLowerCase();
         String output = "you do nothing";
         if (lowerCase.equals("")) {
+            System.out.println(output);
             return output;
         } else if (lowerCase.equals("help")) {
             inGameHelp();
@@ -173,7 +175,7 @@ public class UserInput {
         System.out.println("Are you Sure You want to Quit");
         System.out.println(" Select 1 for Yes and 2 for No");
         System.out.print(">>> ");
-        UserInput newUserInput = new UserInput();
+//        UserInput newUserInput = new UserInput();
         final String quitPageInput = GameScreens.getQuitSelect();
         if (quitPageInput.equals("1")) {
             System.out.println("Thanks for Playing our Game");
