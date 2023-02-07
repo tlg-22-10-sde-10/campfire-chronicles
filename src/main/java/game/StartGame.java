@@ -6,7 +6,7 @@ import character.CharacterSelect;
 
 public class StartGame {
     public static void main(String[] args) throws Exception {
-        CharacterSelect.getCharacterMap();
+//        CharacterSelect.getCharacterMap();
         GameScreens.showTitle();
         UserInput.titleInput();
 

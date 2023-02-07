@@ -14,6 +14,7 @@ import java.util.Map;
 import static java.lang.Integer.parseInt;
 
 public class CharacterSelect {
+    private String item;
     private String name;
     private String description;
     private long speed;
@@ -21,17 +22,17 @@ public class CharacterSelect {
     private long perception;
     private long strength;
     private long wisdom;
-    @SerializedName("item")
+//    @SerializedName("item")
     private String inventory;
     public static JSONObject jsonObject;
     public static final Map<String, CharacterSelect> characterMap;
-    public static final List<CharacterSelect> characterList;
+  //  public static final List<CharacterSelect> characterList;
 
     static {
         try (Reader reader = new InputStreamReader(CharacterSelect.class.getClassLoader().getResourceAsStream("Characters.json"))) {
          Gson gson = new Gson();
          characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
-         characterList = new ArrayList<CharacterSelect>(characterMap.values());
+        // characterList = new ArrayList<CharacterSelect>(characterMap.values());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -40,19 +41,23 @@ public class CharacterSelect {
     public CharacterSelect() {
     }
 
-/*
+
+
+
     public CharacterSelect(String selection) throws InterruptedException {
 
-        Map characterSelector = (Map) jsonObject.get(selection);
-        Map characterStats = (Map) characterSelector.get("stats");
-        this.name = (String) characterSelector.get("name");
-        this.description = (String) characterSelector.get("description");
-        this.speed = (long) characterStats.get("speed");
-        this.stealth = (long) characterStats.get("stealth");
-        this.perception = (long) characterStats.get("perception");
-        this.strength = (long) characterStats.get("strength");
-        this.wisdom = (long) characterStats.get("wisdom");
-        this.inventory = (String) characterSelector.get("item");
+
+        CharacterSelect characterSelector = characterMap.get(selection);
+
+
+        this.name = characterSelector.name;
+        this.description =  characterSelector.description;
+        this.speed =  characterSelector.speed;
+        this.stealth =  characterSelector.stealth;
+        this.perception =  characterSelector.perception;
+        this.strength =  characterSelector.strength;
+        this.wisdom =  characterSelector.wisdom;
+        this.inventory =  characterSelector.item;
         System.out.println("You chose character:");
         System.out.println("name: " + name);
         System.out.println("description: " + description);
@@ -68,8 +73,8 @@ public class CharacterSelect {
         System.out.println();
         Thread.sleep(1500);
 
-    }
-*/
+ }
+
 
     public String getName() {
         return name;
@@ -140,7 +145,11 @@ public class CharacterSelect {
     }
 
 
-    public static List<CharacterSelect> getCharacterList() {
-        return characterList;
+//    public static List<CharacterSelect> getCharacterList() {
+//        return characterList;
+//    }
+
+    public static void main(String[] args) throws InterruptedException {
+        new CharacterSelect("1");
     }
 }
