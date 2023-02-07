@@ -5,6 +5,7 @@ import UserInputs.UserInput;
 import org.json.simple.JSONObject;
 import Character.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 public class GameLogic {
@@ -35,7 +36,7 @@ public class GameLogic {
         GameScreens.inGameHelp();
         System.out.println();
         do {
-            if(illumination = true) {
+            if(illumination == true) {
                 illuminationCounter--;
                 if (illuminationCounter < 1) {
                     illumination = false;}
@@ -43,13 +44,13 @@ public class GameLogic {
             String command = UserInput.getAction();
             processCommand(command);
         }
-        while (gameRunning = true);
+        while (gameRunning == true && moveCounter > 0);
         System.out.println();
-        if (gameWin == true) {
+        if (gameWin == true && moveCounter > 0) {
             System.out.println("congrats! You Win!!");
             System.out.println("Thank you for playing,\n" +
-                    "stay tuned for sprint 2 where the main character is challenged by the terrible monsters");
-        } else if (gameLose == true) {
+                    "stay tuned for sprint 3 where the main character is challenged by the terrible monsters");
+        } else if (gameLose == true || moveCounter < 0) {
             System.out.println("Sorry! You Lose!!");
         }
     }
@@ -107,11 +108,33 @@ public class GameLogic {
     private static void useItem(String item) throws Exception {
         JSONObject itemDetail = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
         itemDetail = (JSONObject) itemDetail.get(item);
-        for (int i = 0; i < inventoryList.size(); i++) {
-            if (inventoryList.get(i).contains(item)) {
-                doItemAction(itemDetail.get("action"), itemDetail, item);
-                break;
+        if (item.equals("bus")) {
+            testWinCondition(item);
+
+        }
+        else {
+            for (int i = 0; i < inventoryList.size(); i++) {
+                if (inventoryList.get(i).contains(item)) {
+                    doItemAction(itemDetail.get("action"), itemDetail, item);
+                    break;
+                } else {
+                    System.out.println("sorry, that item is not in your inventory");
+                }
             }
+        }
+    }
+
+    private static void testWinCondition(String item) throws Exception {
+        switch (item) {
+            case "bus":
+
+                if (inventoryList.contains("Gasoline") && inventoryList.contains("Car Battery") && inventoryList.contains("Water")) {
+                    gameWin = true;
+                    gameRunning = false;
+                }
+
+            default:
+                break;
         }
 
     }
@@ -170,7 +193,7 @@ public class GameLogic {
     private static void SearchRoom() throws Exception {
         String items;
         moveCounter--;
-        if (illumination) {
+        if (illumination == true) {
             System.out.println("the flashlight was used in the search");
         }
         try {
@@ -208,7 +231,7 @@ public class GameLogic {
         if (drinkCounter > 0) {
             System.out.println("Drinks: " + drinkCounter);
         }
-        if (illumination = true) {
+        if (illumination == true) {
             System.out.println("Flashlight battery: " + illuminationCounter);
         }
         System.out.println("Moves: " + moveCounter);
