@@ -78,7 +78,7 @@ public class GameLogic {
             System.out.println("you try to use \"" + item + "\"");
             useItem(item);
         } else if (command.contains("look")) {
-            String item = command.replace("look", "");
+            String item = command.replace("look", "").trim();
             System.out.println("you try to look at \"" + item + "\"");
             LookItem(item);
         } else if (command.contains("search")) {
@@ -119,18 +119,10 @@ public class GameLogic {
     private static void useItem(String item) throws Exception {
         JSONObject itemDetail = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
         itemDetail = (JSONObject) itemDetail.get(item);
-        if (item.equals("bus")) {
-            testWinCondition(item);
-
-        }
-        else {
-            for (int i = 0; i < inventoryList.size(); i++) {
-                if (inventoryList.get(i).contains(item)) {
-                    doItemAction(itemDetail.get("action"), itemDetail, item);
-                    break;
-                } else {
-                    System.out.println("sorry, that item is not in your inventory");
-                }
+        for (int i = 0; i < inventoryList.size(); i++) {
+            if (inventoryList.get(i).contains(item)) {
+                doItemAction(itemDetail.get("action"), itemDetail, item);
+                break;
             }
         }
     }
@@ -138,20 +130,25 @@ public class GameLogic {
     private static void testWinCondition(String item) throws Exception {
         switch (item) {
             case "bus":
-
-                if (inventoryList.contains("Gasoline") && inventoryList.contains("Car Battery") && inventoryList.contains("Water")) {
+                if (inventoryList.contains("gasoline")
+                        && inventoryList.contains("car battery")
+                        && currentLocation.equals("school bus")) {
                     gameWin = true;
                     gameRunning = false;
                 }
 
+                 else {
+                    System.out.println("");
+                }
+                break;
             default:
                 break;
         }
-
     }
 
     /* checks item against items.json, checks action against appropriate use case*/
-    private static void doItemAction(Object action, JSONObject itemDetail, String item) {
+    private static void doItemAction(Object action, JSONObject itemDetail, String item) throws Exception {
+        testWinCondition(action.toString());
         switch (action.toString()) {
             case "lights":
                 illumination = true;
@@ -182,6 +179,9 @@ public class GameLogic {
                 System.out.println(itemDetail.get("correct_use"));
                 illuminationCounter += 3;
                 break;
+//            case "bus":
+//                testWinCondition("bus");
+//                break;
 
             default:
                 System.out.println("invalid action");
@@ -192,13 +192,24 @@ public class GameLogic {
     private static void LookItem(String item) throws Exception {
         JSONObject itemDetail = readExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
         itemDetail = (JSONObject) itemDetail.get(item);
+        int j = inventoryList.size();
         for (int i = 0; i < inventoryList.size(); i++) {
-            String myItem = inventoryList.get(i);
-            if (myItem.contains(item)) {
-                System.out.println(item + " is in your inventory");
-                System.out.println(itemDetail.get("description"));
+            if (inventoryList.get(i).contains(item)) {
+                try {
+                    j--;
+                    System.out.println(itemDetail.get("description"));
+                    System.out.println(item + " is in your inventory and has a purpose");
+                } catch (Exception e) {
+                    System.out.println("you look off into the distance thinking about what lead you to play this game");
+                }
+                break;
+            }
+            else if (j == 0){
+                System.out.println(item + " is not in your inventory");
+
             }
         }
+
     }
 
     private static void SearchRoom() throws Exception {
