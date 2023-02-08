@@ -2,14 +2,10 @@ package game;
 
 import item.Item;
 import map.MapLocation;
-import read_external.ReadExternalFiles;
 import user_Inputs.UserInput;
-import org.json.simple.JSONObject;
 import character.*;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -17,7 +13,6 @@ import java.util.StringTokenizer;
 public class GameLogic {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_Green = "\u001B[32m";
-    public static final String ANSI_Blue = "\\u001B[34m";
     public static boolean gameRunning = true;
     public static boolean gameWin = false;
     public static boolean gameLose = false;
@@ -45,30 +40,30 @@ public class GameLogic {
         GameScreens.inGameHelp();
         System.out.println();
         do {
-            if(illumination == true) {
+            if (illumination == true) {
                 illuminationCounter--;
                 if (illuminationCounter < 1) {
-                    illumination = false;}
+                    illumination = false;
+                }
             }
             String command = UserInput.getAction();
             processCommand(command);
         }
-        while (gameRunning == true && moveCounter > 0);
+        while (gameRunning == true && moveCounter >= 0);
         System.out.println();
         if (gameWin == true && moveCounter > 0) {
             System.out.println("congrats! You Win!!");
             System.out.println("Thank you for playing,\n" +
                     "stay tuned for sprint 3 where the main character is challenged by the terrible monsters");
-        } else if (gameLose == true || moveCounter < 0) {
+        } else if (gameLose == true || moveCounter < 1) {
             System.out.println("Sorry! You Lose!!");
+            System.out.println("Thanks for playing our Game");
         }
     }
 
     /* sends in game command to appropriate function */
     private static void processCommand(String command) throws Exception {
         if (command == "quit") {
-            //gameRunning = false;
-            //System.out.println("Good-Bye!");
             UserInput.quitInput();
         } else if (command.contains("go") || command.contains("move")) {
             command = command.replace("go", "move");
@@ -86,7 +81,7 @@ public class GameLogic {
         } else if (command.contains("search")) {
             System.out.println("you take a look around");
             SearchRoom();
-        }else if (command.contains("map")) {
+        } else if (command.contains("map")) {
             showMap(currentLocation);
 
         }
@@ -99,17 +94,13 @@ public class GameLogic {
             MapLocation location = new MapLocation(currentLocation);
             if (direction.equals("north")) {
                 destination = location.getNorth();
-            }else if (direction.equals("east")) {
+            } else if (direction.equals("east")) {
                 destination = location.getEast();
-            }else if (direction.equals("south")) {
+            } else if (direction.equals("south")) {
                 destination = location.getSouth();
-            }
-            else if (direction.equals("west")) {
+            } else if (direction.equals("west")) {
                 destination = location.getWest();
             }
-//            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-//            jsonObject = (JSONObject) jsonObject.get(currentLocation);
-//            destination = (String) jsonObject.get(direction);
 
             if (destination != null) {
 
@@ -118,7 +109,8 @@ public class GameLogic {
             } else {
                 throw new NullPointerException();
             }
-            if (destination.equals("lake")) {
+            if (destination.equals("lake") && inventoryList.contains("baseball bat")) {
+                System.out.println("you used your Big brain and just swam away");
                 gameRunning = false;
                 gameWin = true;
             }
@@ -130,16 +122,21 @@ public class GameLogic {
 
     /* useItem() checks if item is in inventory and sends to doItemAction() to check use case */
     private static void useItem(String selection) throws Exception {
-        Item useItem = new Item(selection);
-        //JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
-       //itemDetail = (JSONObject) itemDetail.get(selection);
-        for (int i = 0; i < inventoryList.size(); i++) {
-            if (inventoryList.get(i).contains(selection)) {
-                doItemAction(useItem.getAction(), useItem, selection);
-                break;
+        try {
+            Item useItem = new Item(selection);
+            for (int i = 0; i < inventoryList.size(); i++) {
+                if (inventoryList.get(i).contains(selection)) {
+                    doItemAction(useItem.getAction(), useItem, selection);
+                    break;
+
+                }
             }
+        } catch (NullPointerException e) {
+            System.out.println("you waved around your hands and nothing happens");
+            System.out.println("try /'use (item name)/'");
         }
     }
+
 
     private static void testWinCondition(String item) throws Exception {
         switch (item) {
@@ -149,9 +146,7 @@ public class GameLogic {
                         && currentLocation.equals("school bus")) {
                     gameWin = true;
                     gameRunning = false;
-                }
-
-                 else {
+                } else {
                     System.out.println("");
                 }
                 break;
@@ -162,7 +157,7 @@ public class GameLogic {
 
     /* checks item against items.json, checks action against appropriate use case*/
     private static void doItemAction(Object action, Item itemDetail, String item) throws Exception {
-        testWinCondition(action.toString());
+//        testWinCondition(action.toString());
         switch (action.toString()) {
             case "lights":
                 illumination = true;
@@ -193,10 +188,16 @@ public class GameLogic {
                 System.out.println(itemDetail.getCorrect_use());
                 illuminationCounter += 3;
                 break;
-//            case "bus":
-//                testWinCondition("bus");
-//                break;
-
+            case "bus":
+                if (inventoryList.contains("gasoline")
+                        && inventoryList.contains("car battery")
+                        && currentLocation.equals("school bus")) {
+                    gameWin = true;
+                    gameRunning = false;
+                } else {
+                    System.out.println("You don't quite seem to have all the items you need");
+                }
+                break;
             default:
                 System.out.println("invalid action");
         }
@@ -204,28 +205,30 @@ public class GameLogic {
 
     /* checks if item is in inventory and prints description */
     private static void LookItem(String selection) throws Exception {
-        Item item = new Item(selection);
-        //JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
-//        itemDetail = (JSONObject) itemDetail.get(item);
+        Item item;
         int j = inventoryList.size();
         for (int i = 0; i < inventoryList.size(); i++) {
             if (inventoryList.get(i).contains(selection)) {
                 try {
-                    j--;
+                    item = new Item(selection);
+                    //j--;
                     System.out.println(item.getDescription());
                     System.out.println(selection + " is in your inventory and has a purpose");
                 } catch (Exception e) {
                     System.out.println("you look off into the distance thinking about what lead you to play this game");
                 }
                 break;
+            } else {
+                j--;
             }
-            else if (j == 0){
-                System.out.println(item + " is not in your inventory");
 
-            }
+        }
+        if (j == 0) {
+            System.out.println(selection+" is not in your inventory");
         }
 
-    }
+
+}
 
     private static void SearchRoom() throws Exception {
         String items;
@@ -235,9 +238,6 @@ public class GameLogic {
         }
         try {
             MapLocation location = new MapLocation(currentLocation);
-//            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-//            jsonObject = (JSONObject) jsonObject.get(currentLocation);
-//            items = (String) jsonObject.get("item");
             items = location.getItem();
             String delimin = ",";
             StringTokenizer tokenizer = new StringTokenizer(items, delimin);
@@ -245,12 +245,17 @@ public class GameLogic {
                 String item = tokenizer.nextToken().strip();
                 if (item.equals("energy drink")) {
                     drinkCounter++;
-                    inventoryList.add(item);
+                    System.out.println(item + " was added to your inventory");
+                    if( !inventoryList.contains(item)){
+                        inventoryList.add(item);
+                    }
+                   ;
+                } else {
+                    if( !inventoryList.contains(item)){
+                        inventoryList.add(item);
+                        System.out.println(item + " was added to your inventory");
+                    }
                 }
-                else {
-                    inventoryList.add(item);
-                }
-                System.out.println(item + " was added to your inventory");
             }
         } catch (Exception e) {
             System.out.println("nothing here");
@@ -259,10 +264,8 @@ public class GameLogic {
 
     }
 
-    public static void showStatus () throws Exception {
+    public static void showStatus() throws Exception {
         MapLocation location = new MapLocation(currentLocation);
-//        JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-//        jsonObject = (JSONObject) jsonObject.get(currentLocation);
         String desc = location.getDescription();
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
@@ -279,22 +282,20 @@ public class GameLogic {
     }
 
     private static void showMap(String location) throws Exception {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("map.txt")))){
-        //File file = new File("src/main/ExternalFiles/map.txt");
-        //BufferedReader br = new BufferedReader(new FileReader(file));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            int index = line.indexOf(location);
-            if (index != -1) {
-                System.out.print(line.substring(0, index));   //man-walking   //skull  ☠ 🕱
-                System.out.print(ANSI_Green + location + "\uD83D\uDEB6" + ANSI_RESET);
-                System.out.println(line.substring(index + location.length()));
-            } else {
-                System.out.println(line);
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("map.txt")))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int index = line.indexOf(location);
+                if (index != -1) {
+                    System.out.print(line.substring(0, index));   //man-walking   //skull  ☠ 🕱
+                    System.out.print(ANSI_Green + location + "\uD83D\uDEB6" + ANSI_RESET);
+                    System.out.println(line.substring(index + location.length()));
+                } else {
+                    System.out.println(line);
+                }
             }
-        }
 
-    }
+        }
     }
 }
 

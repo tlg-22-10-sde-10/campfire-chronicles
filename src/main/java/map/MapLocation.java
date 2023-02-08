@@ -22,7 +22,6 @@ public class MapLocation<S, M> {
         try (Reader reader = new InputStreamReader(CharacterSelect.class.getClassLoader().getResourceAsStream("map.json"))) {
          Gson gson = new Gson();
          mapperMap = gson.fromJson(reader, new TypeToken<Map<String, MapLocation>>(){}.getType());
-        // characterList = new ArrayList<CharacterSelect>(characterMap.values());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -61,10 +60,5 @@ public class MapLocation<S, M> {
     public String getDescription() {
         return description;
     }
-
-//    public static void main(String[] args) {
-//        MapLocation infirmary = new MapLocation("infirmary");
-//        System.out.println(infirmary.getDescription());
-//    }
 
 }
