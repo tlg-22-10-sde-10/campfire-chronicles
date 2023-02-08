@@ -267,8 +267,8 @@ public class GameLogic {
             while ((line = reader.readLine()) != null) {
                 int index = line.indexOf(location);
                 if (index != -1) {
-                    System.out.print(line.substring(0, index));   //man-walking   //skull  ☠ 🕱
-                    System.out.print(ANSI_Green + location + "\uD83D\uDEB6" + ANSI_RESET);
+                    System.out.print(line.substring(0, index));
+                    System.out.print(ANSI_Green + location + "*" + ANSI_RESET);
                     System.out.println(line.substring(index + location.length()));
                 } else {
                     System.out.println(line);
