@@ -1,16 +1,14 @@
-package read_external;
+package com.campfire_chronicles.read_external;
 
-import character.CharacterSelect;
+import com.campfire_chronicles.character.CharacterSelect;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import game.GameScreens;
+import com.campfire_chronicles.game.GameScreens;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.util.Map;
-
-import static character.CharacterSelect.characterMap;
 
 public class ReadExternalFiles {
     public static Map readJSONFile(String fileName) {
@@ -48,9 +46,9 @@ public class ReadExternalFiles {
             String text;
             while ((text = reader.readLine())!= null) {
                 System.out.println(text);
-                // Thread.sleep(5);//0.5s pause between characters
+                 Thread.sleep(5);//0.5s pause between characters
             }
-    } catch (IOException e) {
+    } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

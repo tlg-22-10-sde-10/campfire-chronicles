@@ -1,8 +1,7 @@
-package character;
+package com.campfire_chronicles.character;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.json.simple.JSONObject;
 
 import java.io.InputStreamReader;
 import java.io.Reader;

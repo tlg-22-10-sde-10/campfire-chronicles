@@ -1,9 +1,9 @@
-package game;
+package com.campfire_chronicles.game;
 
-import item.Item;
-import map.MapLocation;
-import user_Inputs.UserInput;
-import character.*;
+import com.campfire_chronicles.character.CharacterSelect;
+import com.campfire_chronicles.item.Item;
+import com.campfire_chronicles.map.MapLocation;
+import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -81,9 +81,8 @@ public class GameLogic {
         } else if (command.contains("search")) {
             System.out.println("you take a look around");
             SearchRoom();
-        } else if (command.contains("map")) {
+        } else if (command.contains("com/campfire_chronicles/map")) {
             showMap(currentLocation);
-
         }
     }
 
@@ -137,23 +136,6 @@ public class GameLogic {
         }
     }
 
-
-    private static void testWinCondition(String item) throws Exception {
-        switch (item) {
-            case "bus":
-                if (inventoryList.contains("gasoline")
-                        && inventoryList.contains("car battery")
-                        && currentLocation.equals("school bus")) {
-                    gameWin = true;
-                    gameRunning = false;
-                } else {
-                    System.out.println("");
-                }
-                break;
-            default:
-                break;
-        }
-    }
 
     /* checks item against items.json, checks action against appropriate use case*/
     private static void doItemAction(Object action, Item itemDetail, String item) throws Exception {
@@ -226,8 +208,6 @@ public class GameLogic {
         if (j == 0) {
             System.out.println(selection+" is not in your inventory");
         }
-
-
 }
 
     private static void SearchRoom() throws Exception {
