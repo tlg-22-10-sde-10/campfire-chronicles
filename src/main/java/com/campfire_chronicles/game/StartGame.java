@@ -1,12 +1,9 @@
-package Game;
-
-//import UserInputs.NavigateMap;
-import UserInputs.UserInput;
+package com.campfire_chronicles.game;
+import com.campfire_chronicles.user_Inputs.UserInput;
 
 public class StartGame {
     public static void main(String[] args) throws Exception {
-
-        Game.showTitle();
+        GameScreens.showTitle();
         UserInput.titleInput();
 
     }
