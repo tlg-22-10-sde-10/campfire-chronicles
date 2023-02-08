@@ -139,8 +139,8 @@ public class UserInput {
             showStatus();
             output = "status";
             return output;
-        }else if (lowerCase.equals("com/campfire_chronicles/map")) {
-            output = "com/campfire_chronicles/map";
+        }else if (lowerCase.equals("map")) {
+            output = "map";
             return output;
         }
         else {

@@ -81,7 +81,7 @@ public class GameLogic {
         } else if (command.contains("search")) {
             System.out.println("you take a look around");
             SearchRoom();
-        } else if (command.contains("com/campfire_chronicles/map")) {
+        } else if (command.contains("map")) {
             showMap(currentLocation);
         }
     }
