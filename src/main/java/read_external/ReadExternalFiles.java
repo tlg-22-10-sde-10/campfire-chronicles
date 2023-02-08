@@ -1,11 +1,30 @@
 package read_external;
 
+import character.CharacterSelect;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import game.GameScreens;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.*;
+import java.util.Map;
+
+import static character.CharacterSelect.characterMap;
 
 public class ReadExternalFiles {
+    public static Map readJSONFile(String fileName) {
+        try (Reader reader = new InputStreamReader(CharacterSelect.class.getClassLoader().getResourceAsStream(fileName))) {
+            Gson gson = new Gson();
+            Map<String,CharacterSelect> characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
+            //characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
+            // characterList = new ArrayList<CharacterSelect>(characterMap.values());
+            return characterMap;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static JSONObject getJSONFromFile(String filename) throws Exception {
         String json = "";
         try{
@@ -25,18 +44,32 @@ public class ReadExternalFiles {
 
         return jsonObject;
     }
-    public static void readText(String filename) throws Exception {
-        File file = new File(filename);
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String text;
-        while ((text = br.readLine())!= null) {
-                try {
-                    System.out.println(text);
-                    Thread.sleep(5);//0.5s pause between characters
-                } catch (InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-
+//    public static void readText(String filename) throws Exception {
+//        File file = new File(filename);
+//        BufferedReader br = new BufferedReader(new FileReader(file));
+//        String text;
+//        while ((text = br.readLine())!= null) {
+//                try {
+//                    System.out.println(text);
+//                    Thread.sleep(5);//0.5s pause between characters
+//                } catch (InterruptedException ex) {
+//                    Thread.currentThread().interrupt();
+//                }
+//
+//        }
+//    }
+    public static void readText(String filename)  {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream(filename)))){
+            String text;
+            while ((text = reader.readLine())!= null) {
+                System.out.println(text);
+                // Thread.sleep(5);//0.5s pause between characters
+            }
+    } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+
+
 }

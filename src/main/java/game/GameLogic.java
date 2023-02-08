@@ -1,5 +1,7 @@
 package game;
 
+import item.Item;
+import map.MapLocation;
 import read_external.ReadExternalFiles;
 import user_Inputs.UserInput;
 import org.json.simple.JSONObject;
@@ -8,6 +10,7 @@ import character.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -93,9 +96,20 @@ public class GameLogic {
     private static void Navigate(String direction) throws NullPointerException {
         String destination = null;
         try {
-            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-            jsonObject = (JSONObject) jsonObject.get(currentLocation);
-            destination = (String) jsonObject.get(direction);
+            MapLocation location = new MapLocation(currentLocation);
+            if (direction.equals("north")) {
+                destination = location.getNorth();
+            }else if (direction.equals("east")) {
+                destination = location.getEast();
+            }else if (direction.equals("south")) {
+                destination = location.getSouth();
+            }
+            else if (direction.equals("west")) {
+                destination = location.getWest();
+            }
+//            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+//            jsonObject = (JSONObject) jsonObject.get(currentLocation);
+//            destination = (String) jsonObject.get(direction);
 
             if (destination != null) {
 
@@ -115,12 +129,13 @@ public class GameLogic {
     }
 
     /* useItem() checks if item is in inventory and sends to doItemAction() to check use case */
-    private static void useItem(String item) throws Exception {
-        JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
-        itemDetail = (JSONObject) itemDetail.get(item);
+    private static void useItem(String selection) throws Exception {
+        Item useItem = new Item(selection);
+        //JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
+       //itemDetail = (JSONObject) itemDetail.get(selection);
         for (int i = 0; i < inventoryList.size(); i++) {
-            if (inventoryList.get(i).contains(item)) {
-                doItemAction(itemDetail.get("action"), itemDetail, item);
+            if (inventoryList.get(i).contains(selection)) {
+                doItemAction(useItem.getAction(), useItem, selection);
                 break;
             }
         }
@@ -146,16 +161,16 @@ public class GameLogic {
     }
 
     /* checks item against items.json, checks action against appropriate use case*/
-    private static void doItemAction(Object action, JSONObject itemDetail, String item) throws Exception {
+    private static void doItemAction(Object action, Item itemDetail, String item) throws Exception {
         testWinCondition(action.toString());
         switch (action.toString()) {
             case "lights":
                 illumination = true;
-                System.out.println(itemDetail.get("correct_use"));
+                System.out.println(itemDetail.getCorrect_use());
                 break;
             case "energy_boost":
                 moveCounter += 3;
-                System.out.println(itemDetail.get("correct_use"));
+                System.out.println(itemDetail.getCorrect_use());
                 System.out.println("+3 moves");
                 drinkCounter--;
                 if (drinkCounter < 1) {
@@ -164,18 +179,18 @@ public class GameLogic {
                 break;
             case "unlock":
                 System.out.println("coming soon: Actual Unlock use");
-                System.out.println(itemDetail.get("correct_use"));
+                System.out.println(itemDetail.getCorrect_use());
                 break;
             case "swing_bat":
                 if (moveCounter > 10) {
-                    System.out.println(itemDetail.get("correct_use"));
+                    System.out.println(itemDetail.getCorrect_use());
                 } else {
                     System.out.println("not enough moves");
-                    System.out.println(itemDetail.get("incorrect_use"));
+                    System.out.println(itemDetail.getIncorrect_use());
                 }
                 break;
             case "power_up":
-                System.out.println(itemDetail.get("correct_use"));
+                System.out.println(itemDetail.getCorrect_use());
                 illuminationCounter += 3;
                 break;
 //            case "bus":
@@ -188,16 +203,17 @@ public class GameLogic {
     }
 
     /* checks if item is in inventory and prints description */
-    private static void LookItem(String item) throws Exception {
-        JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
-        itemDetail = (JSONObject) itemDetail.get(item);
+    private static void LookItem(String selection) throws Exception {
+        Item item = new Item(selection);
+        //JSONObject itemDetail = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/items.json");
+//        itemDetail = (JSONObject) itemDetail.get(item);
         int j = inventoryList.size();
         for (int i = 0; i < inventoryList.size(); i++) {
-            if (inventoryList.get(i).contains(item)) {
+            if (inventoryList.get(i).contains(selection)) {
                 try {
                     j--;
-                    System.out.println(itemDetail.get("description"));
-                    System.out.println(item + " is in your inventory and has a purpose");
+                    System.out.println(item.getDescription());
+                    System.out.println(selection + " is in your inventory and has a purpose");
                 } catch (Exception e) {
                     System.out.println("you look off into the distance thinking about what lead you to play this game");
                 }
@@ -218,9 +234,11 @@ public class GameLogic {
             System.out.println("the flashlight was used in the search");
         }
         try {
-            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-            jsonObject = (JSONObject) jsonObject.get(currentLocation);
-            items = (String) jsonObject.get("item");
+            MapLocation location = new MapLocation(currentLocation);
+//            JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+//            jsonObject = (JSONObject) jsonObject.get(currentLocation);
+//            items = (String) jsonObject.get("item");
+            items = location.getItem();
             String delimin = ",";
             StringTokenizer tokenizer = new StringTokenizer(items, delimin);
             while (tokenizer.hasMoreTokens()) {
@@ -242,9 +260,10 @@ public class GameLogic {
     }
 
     public static void showStatus () throws Exception {
-        JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
-        jsonObject = (JSONObject) jsonObject.get(currentLocation);
-        String desc = (String) jsonObject.get("description");
+        MapLocation location = new MapLocation(currentLocation);
+//        JSONObject jsonObject = ReadExternalFiles.getJSONFromFile("src/main/ExternalFiles/map.json");
+//        jsonObject = (JSONObject) jsonObject.get(currentLocation);
+        String desc = location.getDescription();
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
         System.out.println("Description: " + desc);
@@ -260,10 +279,11 @@ public class GameLogic {
     }
 
     private static void showMap(String location) throws Exception {
-        File file = new File("src/main/ExternalFiles/map.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("map.txt")))){
+        //File file = new File("src/main/ExternalFiles/map.txt");
+        //BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
-        while ((line = br.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             int index = line.indexOf(location);
             if (index != -1) {
                 System.out.print(line.substring(0, index));   //man-walking   //skull  ☠ 🕱
@@ -274,6 +294,7 @@ public class GameLogic {
             }
         }
 
+    }
     }
 }
 

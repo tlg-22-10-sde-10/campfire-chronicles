@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONObject;
+import read_external.ReadExternalFiles;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -29,6 +30,7 @@ public class CharacterSelect {
   //  public static final List<CharacterSelect> characterList;
 
     static {
+//        characterMap = new ReadExternalFiles().readJSONFile("Characters.json");
         try (Reader reader = new InputStreamReader(CharacterSelect.class.getClassLoader().getResourceAsStream("Characters.json"))) {
          Gson gson = new Gson();
          characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
@@ -40,9 +42,6 @@ public class CharacterSelect {
 
     public CharacterSelect() {
     }
-
-
-
 
     public CharacterSelect(String selection) throws InterruptedException {
 
@@ -80,76 +79,46 @@ public class CharacterSelect {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public long getSpeed() {
         return speed;
     }
 
-    public void setSpeed(long speed) {
-        this.speed = speed;
-    }
 
     public long getStealth() {
         return stealth;
     }
 
-    public void setStealth(long stealth) {
-        this.stealth = stealth;
-    }
+
 
     public long getPerception() {
         return perception;
     }
 
-    public void setPerception(long perception) {
-        this.perception = perception;
-    }
+
 
     public long getStrength() {
         return strength;
     }
 
-    public void setStrength(long strength) {
-        this.strength = strength;
-    }
 
     public long getWisdom() {
         return wisdom;
     }
 
-    public void setWisdom(long wisdom) {
-        this.wisdom = wisdom;
-    }
 
     public String getInventory() {
         return inventory;
     }
 
-    public void setInventory(String inventory) {
-        this.inventory = inventory;
-    }
 
     public static Map<String, CharacterSelect> getCharacterMap() {
         return characterMap;
     }
 
 
-//    public static List<CharacterSelect> getCharacterList() {
-//        return characterList;
-//    }
-
-    public static void main(String[] args) throws InterruptedException {
-        new CharacterSelect("1");
-    }
 }

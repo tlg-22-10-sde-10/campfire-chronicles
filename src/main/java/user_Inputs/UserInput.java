@@ -43,38 +43,33 @@ public class UserInput {
     }
 
     private static void CharacterInput() throws Exception {
-//        CharacterSelect player = null;
-//        String inventory = null;
-//        System.out.println("New Game has been selected");
-//        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Easy Kid (select 4)     Back to Main(select 5)   Quit(select 6)");
-////        UserInput newUserInput = new UserInput();
-//        System.out.print(">>> ");
-//        final String CharacterSelectionInput = GameScreens.getCharacterSelect();
-//        if (CharacterSelectionInput.equals("1")) {
-//            player = new CharacterSelect("1");
-////            inventory = player.getInventory("1");
-//        } else if (CharacterSelectionInput.equals("2")) {
-//            player = new CharacterSelect("2");
-////            inventory = player.getInventory("2");
-//        } else if (CharacterSelectionInput.equals("3")) {
-//            player = new CharacterSelect("3");
-////            inventory = player.getInventory("3");
-//        } else if (CharacterSelectionInput.equals("4")) {
-//            player = new CharacterSelect("4");
-////            inventory = player.getInventory("4");
-//        } else if (CharacterSelectionInput.equals("5")) {
-//            titleInput();
-//        } else if (CharacterSelectionInput.equals("6")) {
-//            System.out.println("Thanks for Playing our Game");
-//            System.exit(0);
-//        } else {
-//            System.out.println("Wrong input, try again by typing a digit from 1-6");
-//        }
-//        JournalInput(player);
+        CharacterSelect player = null;
+        System.out.println("New Game has been selected");
+        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Easy Kid (select 4)     Back to Main(select 5)   Quit(select 6)");
+        UserInput newUserInput = new UserInput();
+        System.out.print(">>> ");
+        final String CharacterSelectionInput = GameScreens.getCharacterSelect();
+        if (CharacterSelectionInput.equals("1")) {
+            player = new CharacterSelect("1");
+        } else if (CharacterSelectionInput.equals("2")) {
+            player = new CharacterSelect("2");
+        } else if (CharacterSelectionInput.equals("3")) {
+            player = new CharacterSelect("3");
+        } else if (CharacterSelectionInput.equals("4")) {
+            player = new CharacterSelect("4");
+        } else if (CharacterSelectionInput.equals("5")) {
+            titleInput();
+        } else if (CharacterSelectionInput.equals("6")) {
+            System.out.println("Thanks for Playing our Game");
+            System.exit(0);
+        } else {
+            System.out.println("Wrong input, try again by typing a digit from 1-6");
+        }
+        JournalInput(player);
     }
-
+/*Need to fix method in ReadExternalFiles*/
     private static void JournalInput(CharacterSelect player) throws Exception {
-        ReadExternalFiles.readText("src/main/ExternalFiles/Opening.txt");
+        ReadExternalFiles.readText("Opening.txt");
         System.out.println("\nYou pick to read:");
         System.out.println("Red Journal  (select 1)      Brown Journal (select 2)      Blue Journal (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         System.out.print(">>> ");

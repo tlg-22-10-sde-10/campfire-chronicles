@@ -1,41 +1,48 @@
 {
   "bat": {
+    "name": "bat",
     "description": "made of wood",
     "correct_use": "you swing the bat, wow something really cool happens!!",
     "incorrect_use": "you swing the bat... nothing happens",
     "action": "swing_bat"
   },
   "flashlight": {
+    "name": "flashlight",
     "description": "the batteries are good i hope",
     "correct_use": "Wow you can see everything",
     "incorrect_use": "the flashlight cant be use right now",
     "action": "lights"
   },
   "hairpin": {
+    "name": "hairpin",
     "description": "small U-shaped hair accessory used to hold hair in place by pinning it up or creating loops and twists.",
     "correct_use": "you're able to unlock the door using the hairpin",
     "incorrect_use": "the hairpin cant be use right now",
     "action": "unlock"
   },
   "drink": {
+    "name": "drink",
     "description": "energy drinks can have high caffeine levels, and it is recommended to consume them in moderation",
     "correct_use": "You feel a rush of energy coursing through your veins.",
     "incorrect_use": "you can't drink that right now",
     "action": "energy_boost"
   },
   "batteries": {
+    "name": "batteries",
     "description": "a fresh pack of batteries",
     "correct_use": "flashlight battery power +++",
     "incorrect_use": "those are no good to you",
     "action": "power_up"
   },
   "gasoline": {
+    "name": "gasoline",
     "description": "this looks like it could be used to power som sort of vehicle",
     "correct_use": "you replace the bus battery, gas it up, and drive off into the sunset",
     "incorrect_use": "this looks like it could be used to power som sort of vehicle",
     "action": "bus"
   },
   "battery": {
+    "name": "battery",
     "description": "this looks like it could be used to power som sort of vehicle",
     "correct_use": "you replace the bus battery, gas it up, and drive off into the sunset",
     "incorrect_use": "this looks like it could be used to power som sort of vehicle",
