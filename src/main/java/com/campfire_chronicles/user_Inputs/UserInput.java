@@ -1,14 +1,19 @@
-package user_Inputs;
+package com.campfire_chronicles.user_Inputs;
 
-import game.*;
+import com.campfire_chronicles.character.CharacterSelect;
+import com.campfire_chronicles.game.GameLogic;
+import com.campfire_chronicles.game.GameScreens;
+import com.campfire_chronicles.read_external.ReadExternalFiles;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.*;
-import character.*;
-import read_external.ReadExternalFiles;
-import static game.GameScreens.inGameHelp;
-import static game.GameLogic.showStatus;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import static com.campfire_chronicles.game.GameLogic.showStatus;
+import static com.campfire_chronicles.game.GameScreens.inGameHelp;
 
 public class UserInput {
     public UserInput() {
@@ -156,11 +161,13 @@ public class UserInput {
         String verb = words.get(0);
         String noun = words.get(words.size() - 1);
         String output;
-        List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go", "search", "map"));
+        List<String> commands = new ArrayList<>(Arrays.asList("attack", "move", "look", "hide", "use", "go", "search", "com/campfire_chronicles/map"));
         if (commands.contains(verb)) {
             output = verb + " " + noun;
-        } else {
-            output = "invalid command";
+        }
+        else {
+            System.out.println("clearly you didn't read the help text");
+            output = "try using \"help\"";
         }
         return output;
     }

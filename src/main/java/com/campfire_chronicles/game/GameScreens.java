@@ -1,6 +1,6 @@
-package game;
+package com.campfire_chronicles.game;
 
-import user_Inputs.UserInput;
+import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.*;
 import java.util.Arrays;

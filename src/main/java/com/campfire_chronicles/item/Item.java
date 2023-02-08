@@ -1,4 +1,4 @@
-package item;
+package com.campfire_chronicles.item;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,6 +1,6 @@
-package map;
+package com.campfire_chronicles.map;
 
-import character.CharacterSelect;
+import com.campfire_chronicles.character.CharacterSelect;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
