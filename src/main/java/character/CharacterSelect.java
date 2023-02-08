@@ -1,18 +1,12 @@
 package character;
 
 import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONObject;
-import read_external.ReadExternalFiles;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-import static java.lang.Integer.parseInt;
 
 public class CharacterSelect {
     private String item;
@@ -23,18 +17,14 @@ public class CharacterSelect {
     private long perception;
     private long strength;
     private long wisdom;
-//    @SerializedName("item")
     private String inventory;
-    public static JSONObject jsonObject;
     public static final Map<String, CharacterSelect> characterMap;
-  //  public static final List<CharacterSelect> characterList;
 
     static {
-//        characterMap = new ReadExternalFiles().readJSONFile("Characters.json");
         try (Reader reader = new InputStreamReader(CharacterSelect.class.getClassLoader().getResourceAsStream("Characters.json"))) {
-         Gson gson = new Gson();
-         characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
-        // characterList = new ArrayList<CharacterSelect>(characterMap.values());
+            Gson gson = new Gson();
+            characterMap = gson.fromJson(reader, new TypeToken<Map<String, CharacterSelect>>() {
+            }.getType());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -50,13 +40,13 @@ public class CharacterSelect {
 
 
         this.name = characterSelector.name;
-        this.description =  characterSelector.description;
-        this.speed =  characterSelector.speed;
-        this.stealth =  characterSelector.stealth;
-        this.perception =  characterSelector.perception;
-        this.strength =  characterSelector.strength;
-        this.wisdom =  characterSelector.wisdom;
-        this.inventory =  characterSelector.item;
+        this.description = characterSelector.description;
+        this.speed = characterSelector.speed;
+        this.stealth = characterSelector.stealth;
+        this.perception = characterSelector.perception;
+        this.strength = characterSelector.strength;
+        this.wisdom = characterSelector.wisdom;
+        this.inventory = characterSelector.item;
         System.out.println("You chose character:");
         System.out.println("name: " + name);
         System.out.println("description: " + description);
@@ -72,7 +62,7 @@ public class CharacterSelect {
         System.out.println();
         Thread.sleep(1500);
 
- }
+    }
 
 
     public String getName() {
@@ -94,11 +84,9 @@ public class CharacterSelect {
     }
 
 
-
     public long getPerception() {
         return perception;
     }
-
 
 
     public long getStrength() {

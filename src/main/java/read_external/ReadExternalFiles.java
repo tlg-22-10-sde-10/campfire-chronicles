@@ -17,8 +17,6 @@ public class ReadExternalFiles {
         try (Reader reader = new InputStreamReader(CharacterSelect.class.getClassLoader().getResourceAsStream(fileName))) {
             Gson gson = new Gson();
             Map<String,CharacterSelect> characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
-            //characterMap = gson.fromJson(reader, new TypeToken<Map<String,CharacterSelect>>(){}.getType());
-            // characterList = new ArrayList<CharacterSelect>(characterMap.values());
             return characterMap;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -44,20 +42,7 @@ public class ReadExternalFiles {
 
         return jsonObject;
     }
-//    public static void readText(String filename) throws Exception {
-//        File file = new File(filename);
-//        BufferedReader br = new BufferedReader(new FileReader(file));
-//        String text;
-//        while ((text = br.readLine())!= null) {
-//                try {
-//                    System.out.println(text);
-//                    Thread.sleep(5);//0.5s pause between characters
-//                } catch (InterruptedException ex) {
-//                    Thread.currentThread().interrupt();
-//                }
-//
-//        }
-//    }
+
     public static void readText(String filename)  {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream(filename)))){
             String text;

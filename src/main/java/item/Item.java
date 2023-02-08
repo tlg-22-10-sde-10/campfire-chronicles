@@ -1,6 +1,5 @@
 package item;
 
-import character.CharacterSelect;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -17,11 +16,9 @@ public class Item {
     public static final Map<String, Item> itemsMap;
 
     static {
-//        characterMap = new ReadExternalFiles().readJSONFile("Characters.json");
         try (Reader reader = new InputStreamReader(Item.class.getClassLoader().getResourceAsStream("items.json"))) {
             Gson gson = new Gson();
             itemsMap = gson.fromJson(reader, new TypeToken<Map<String,Item>>(){}.getType());
-            // characterList = new ArrayList<CharacterSelect>(characterMap.values());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -56,8 +53,4 @@ public class Item {
         return action;
     }
 
-//    public static void main(String[] args) {
-//        Item flashlight = new Item("flashlight");
-//        System.out.println(flashlight.getDescription());
-//    }
 }
