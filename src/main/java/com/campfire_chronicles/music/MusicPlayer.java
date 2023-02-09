@@ -1,17 +1,16 @@
 package com.campfire_chronicles.music;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 
-public class BackgroundMusic {
+public class MusicPlayer {
     private static Clip clip;
     private static boolean playing = false;
 
-    public BackgroundMusic() {
+    public MusicPlayer(String file) {
         try {
-            File file = new File("src/main/resources/Soft-jazzy-chords-loop.wav");
-            AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+
+            AudioInputStream sound = AudioSystem.getAudioInputStream(MusicPlayer.class.getResourceAsStream(file));
             clip = AudioSystem.getClip();
             clip.open(sound);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
@@ -26,7 +25,7 @@ public class BackgroundMusic {
         gainControl.setValue(volume);
     }
 
-    public void play() {
+    public void playLoop() {
         if (!playing) {
             clip.setFramePosition(0);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -34,6 +33,13 @@ public class BackgroundMusic {
             playing = true;
         }
     }
+     public void playOnce() {
+        clip.setFramePosition(0);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.start();
+        playing = true;
+
+        }
 
     public static void stop() {
         if (playing) {
