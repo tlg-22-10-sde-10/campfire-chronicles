@@ -3,6 +3,7 @@ package com.campfire_chronicles.game;
 import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.item.Item;
 import com.campfire_chronicles.map.MapLocation;
+import com.campfire_chronicles.monster.MonsterSelect;
 import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.BufferedReader;
@@ -21,6 +22,7 @@ public class GameLogic {
     private static int drinkCounter;
     private static int illuminationCounter = 10;
     public static CharacterSelect player;
+    public static MonsterSelect monster;
     public static String currentLocation = "campfire";
     public static ArrayList<String> inventoryList = new ArrayList<>();
 
@@ -30,8 +32,9 @@ public class GameLogic {
     public GameLogic() throws Exception {
     }
 
-    public static void startGame(CharacterSelect userChoice) throws Exception {
-        player = userChoice;
+    public static void startGame(CharacterSelect userCharacter, MonsterSelect userMonster) throws Exception {
+        player = userCharacter;
+        monster = userMonster;
         String inventory = player.getInventory();
         System.out.println("inventory: " + inventory);
         moveCounter = 10;

@@ -3,6 +3,7 @@ package com.campfire_chronicles.user_Inputs;
 import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.game.GameLogic;
 import com.campfire_chronicles.game.GameScreens;
+import com.campfire_chronicles.monster.MonsterSelect;
 import com.campfire_chronicles.read_external.ReadExternalFiles;
 
 import java.io.BufferedReader;
@@ -74,17 +75,21 @@ public class UserInput {
     }
 /*Need to fix method in ReadExternalFiles*/
     private static void JournalInput(CharacterSelect player) throws Exception {
+        MonsterSelect monster = null;
         ReadExternalFiles.readText("Opening.txt");
         System.out.println("\nYou pick to read:");
         System.out.println("Red Journal  (select 1)      Brown Journal (select 2)      Blue Journal (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         System.out.print(">>> ");
         final String JournalSelectionInput = GameScreens.getJournalSelect();
         if (JournalSelectionInput.equals("1")) {
-            System.out.println("Suddenly, as you flip through the pages, a swarm of bats flew out of the journal, swarming all around you.\n In the midst of the chaos, a figure appeared, shrouded in darkness. A Vampire has appeared.");
+            monster = new MonsterSelect("1");
+            System.out.println(monster.getIntro());
         } else if (JournalSelectionInput.equals("2")) {
-            System.out.println("When you open the journal and hear a howl that echoes through the forest, bouncing off the trees and lingering in the air long after the sound has died down.\n Suddenly a large figure emerges from the shadow. Its fur standing on end and its eyes glowing in the dark. A Werewolf has appeared.");
+            monster = new MonsterSelect("2");
+            System.out.println(monster.getIntro());
         } else if (JournalSelectionInput.equals("3")) {
-            System.out.println("As you open the journal two translucent hands reach out to grab you. You dropped the journal and watch a ghostly figure emerge from the journal and take shape before you eyes. A Ghost has appeared");
+            monster = new MonsterSelect("3");
+            System.out.println(monster.getIntro());
         } else if (JournalSelectionInput.equals("4")) {
             CharacterInput();
         } else if (JournalSelectionInput.equals("5")) {
@@ -93,7 +98,7 @@ public class UserInput {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
         }
-        GameLogic.startGame(player);
+        GameLogic.startGame(player, monster);
     }
 
     public static void helpInput() throws Exception {

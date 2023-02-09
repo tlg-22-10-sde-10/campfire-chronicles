@@ -1,29 +1,29 @@
 {
-  "vampire": {
+  "1": {
+    "name": "vampire",
+    "intro": "Suddenly, as you flip through the pages, a swarm of bats flew out of the journal, swarming all around you.\n In the midst of the chaos, a figure appeared, shrouded in darkness. A Vampire has appeared.",
     "description": "a creepy, creature with sharp fangs, glowing red eyes, a long black cape, and a sinister smile. He is fiercely determined to suck the blood of any unsuspecting child who crosses his path.",
-    "dialogue": {
-      "stage_entrance": "Welcome to my lair, little one. Your blood will be the sweetest of them all.",
-      "player_loss": "Don't be afraid, my little victim. I promise this won't hurt much.",
-      "player_win": "Finally, my curse is lifted.",
-      "player_escape": "Run all you want, child. You can't hide from me forever."
-    }
+    "stage_entrance": "Welcome to my lair, little one. Your blood will be the sweetest of them all.",
+    "player_loss": "Don't be afraid, my little victim. I promise this won't hurt much.",
+    "player_win": "Finally, my curse is lifted.",
+    "player_escape": "Run all you want, child. You can't hide from me forever."
   },
-  "werewolf": {
+  "2": {
+    "name": "werewolf",
+    "intro": "When you open the journal and hear a howl that echoes through the forest, bouncing off the trees and lingering in the air long after the sound has died down.\n Suddenly a large figure emerges from the shadow. Its fur standing on end and its eyes glowing in the dark. A Werewolf has appeared.",
     "description": " a fierce and dangerous monster that transforms from a human into a wild, savage beast under the light of the full moon. It has fur as black as night, razor-sharp claws, and glowing yellow eyes. It is known to roam the forest, howling at the moon and hunting for its next prey.",
-    "dialogue": {
-      "stage_entrance": "You should have never entered my territory, child.",
-      "player_loss": "You'll make a fine addition to my pack, child.",
-      "player_win": "Finally...peace...My curse...broken...No more pain...",
-      "player_escape": "Your scent is etched in my memory, child. I'll find you."
-    }
+    "stage_entrance": "You should have never entered my territory, child.",
+    "player_loss": "You'll make a fine addition to my pack, child.",
+    "player_win": "Finally...peace...My curse...broken...No more pain...",
+    "player_escape": "Your scent is etched in my memory, child. I'll find you."
   },
-  "ghost": {
+  "3": {
+    "name": "ghost",
+    "intro": "As you open the journal two translucent hands reach out to grab you. You dropped the journal and watch a ghostly figure emerge from the journal and take shape before you eyes. A Ghost has appeared",
     "description": " a pale and eerie figure with a haunting presence. It floats through the air, emitting a ghostly glow and making strange noises. Its long, tattered robes trail behind it, giving it an ominous appearance. Despite its scary appearance, the ghost is said to be searching for something it lost in life and may grant a wish to anyone brave enough to approach it.",
-    "dialogue": {
-      "stage_entrance": "Why have you disturbed my rest, child?",
-      "player_loss": "Be careful what you wish for, child. Death is all I have to offer",
-      "player_win": "Thank you, child... my spirit can finally rest.",
-      "player_escape": "This isn't the end, mortal. I'll haunt you forever."
-    }
+    "stage_entrance": "Why have you disturbed my rest, child?",
+    "player_loss": "Be careful what you wish for, child. Death is all I have to offer",
+    "player_win": "Thank you, child... my spirit can finally rest.",
+    "player_escape": "This isn't the end, mortal. I'll haunt you forever."
   }
 }
