@@ -4,6 +4,7 @@ import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.game.GameLogic;
 import com.campfire_chronicles.game.GameScreens;
 import com.campfire_chronicles.monster.MonsterSelect;
+import com.campfire_chronicles.music.BackgroundMusic;
 import com.campfire_chronicles.read_external.ReadExternalFiles;
 
 import java.io.BufferedReader;
@@ -22,7 +23,7 @@ public class UserInput {
 
     public static void titleInput() throws Exception {
         System.out.println("Please select an option: ");
-        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
+        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Music Off (select 4)      Quit(select 5)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
@@ -43,6 +44,9 @@ public class UserInput {
         } else if (homePageInput.equals("3")) {
             GameScreens.displayHelp();
         } else if (homePageInput.equals("4")) {
+            BackgroundMusic.stop();
+          UserInput.helpInput();
+        }else if (homePageInput.equals("5")) {
         } else {
             System.out.println("Wrong input, try again by typing a digit from 1-4");
         }
