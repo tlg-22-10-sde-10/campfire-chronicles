@@ -4,7 +4,7 @@ import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.game.GameLogic;
 import com.campfire_chronicles.game.GameScreens;
 import com.campfire_chronicles.monster.MonsterSelect;
-import com.campfire_chronicles.music.BackgroundMusic;
+import com.campfire_chronicles.music.MusicPlayer;
 import com.campfire_chronicles.read_external.ReadExternalFiles;
 
 import java.io.BufferedReader;
@@ -122,23 +122,23 @@ public class UserInput {
         System.out.print(">>> ");
         final String soundPageInput = GameScreens.getHelpSelect();
         if (soundPageInput.equals("1")) {
-            BackgroundMusic.stop();
+            MusicPlayer.stop();
             titleInput();
         } else if (soundPageInput.equals("2")) {
             System.out.println("Adjusting volume [1 - 5]");
             System.out.print(">>> ");
             final String volumeInput = GameScreens.getSoundSelect();
             if (volumeInput.equals("1")) {
-                BackgroundMusic.setVolume(-10.0f);
+                MusicPlayer.setVolume(-10.0f);
             }
             else if (volumeInput.equals("2")) {
-                BackgroundMusic.setVolume(-8.0f);
+                MusicPlayer.setVolume(-8.0f);
             }
             else if (volumeInput.equals("3")) {
-                BackgroundMusic.setVolume(-6.0f);
+                MusicPlayer.setVolume(-6.0f);
             }
             else if (volumeInput.equals("4")) {
-                BackgroundMusic.setVolume(-5.0f);
+                MusicPlayer.setVolume(-5.0f);
             }
             else if (volumeInput.equals("5")) {
                 titleInput();

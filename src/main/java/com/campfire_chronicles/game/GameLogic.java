@@ -4,6 +4,7 @@ import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.item.Item;
 import com.campfire_chronicles.map.MapLocation;
 import com.campfire_chronicles.monster.MonsterSelect;
+import com.campfire_chronicles.music.MusicPlayer;
 import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.BufferedReader;
@@ -25,6 +26,7 @@ public class GameLogic {
     public static MonsterSelect monster;
     public static String currentLocation = "campfire";
     public static ArrayList<String> inventoryList = new ArrayList<>();
+
 
 //    public static String desc;
 
@@ -52,13 +54,17 @@ public class GameLogic {
             String command = UserInput.getAction();
             processCommand(command);
         }
-        while (gameRunning == true && moveCounter >= 0);
+        while (gameRunning == true && moveCounter > 0);
         System.out.println();
         if (gameWin == true && moveCounter > 0) {
+            new MusicPlayer("/game-win.wav").playOnce();
+            Thread.sleep(2000);
             System.out.println("congrats! You Win!!");
             System.out.println("Thank you for playing,\n" +
                     "stay tuned for sprint 3 where the main character is challenged by the terrible monsters");
         } else if (gameLose == true || moveCounter < 1) {
+            new MusicPlayer("/game-over.wav").playOnce();
+            Thread.sleep(500);
             System.out.println("Sorry! You Lose!!");
             System.out.println("Thanks for playing our Game");
         }
@@ -150,6 +156,7 @@ public class GameLogic {
                 break;
             case "energy_boost":
                 moveCounter += 3;
+                new MusicPlayer("/drink-soda.wav").playOnce();
                 System.out.println(itemDetail.getCorrect_use());
                 System.out.println("+3 moves");
                 drinkCounter--;
