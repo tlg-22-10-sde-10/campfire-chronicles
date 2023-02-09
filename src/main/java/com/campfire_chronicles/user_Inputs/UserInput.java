@@ -23,7 +23,7 @@ public class UserInput {
 
     public static void titleInput() throws Exception {
         System.out.println("Please select an option: ");
-        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Music Off (select 4)      Quit(select 5)\"\n";
+        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Sound Settings (select 4)      Quit(select 5)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
@@ -44,7 +44,7 @@ public class UserInput {
         } else if (homePageInput.equals("3")) {
             GameScreens.displayHelp();
         } else if (homePageInput.equals("4")) {
-            BackgroundMusic.stop();
+            soundSettings();
           UserInput.helpInput();
         }else if (homePageInput.equals("5")) {
         } else {
@@ -115,6 +115,35 @@ public class UserInput {
         } else if (helpPageInput.equals("2")) {
             System.out.println("Thanks for playing");
 
+        }
+    }
+    public static void soundSettings() throws Exception {
+        System.out.println("Mute Background Music(select 1)      Adjust Volume(select 2) ");
+        System.out.print(">>> ");
+        final String soundPageInput = GameScreens.getHelpSelect();
+        if (soundPageInput.equals("1")) {
+            BackgroundMusic.stop();
+            titleInput();
+        } else if (soundPageInput.equals("2")) {
+            System.out.println("Adjusting volume [1 - 5]");
+            System.out.print(">>> ");
+            final String volumeInput = GameScreens.getSoundSelect();
+            if (volumeInput.equals("1")) {
+                BackgroundMusic.setVolume(-10.0f);
+            }
+            else if (volumeInput.equals("2")) {
+                BackgroundMusic.setVolume(-8.0f);
+            }
+            else if (volumeInput.equals("3")) {
+                BackgroundMusic.setVolume(-6.0f);
+            }
+            else if (volumeInput.equals("4")) {
+                BackgroundMusic.setVolume(-5.0f);
+            }
+            else if (volumeInput.equals("5")) {
+                titleInput();
+            }
+            titleInput();
         }
     }
 
