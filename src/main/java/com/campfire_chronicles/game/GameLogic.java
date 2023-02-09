@@ -9,12 +9,15 @@ import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 public class GameLogic {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_Green = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
     public static boolean gameRunning = true;
     public static boolean gameWin = false;
     public static boolean gameLose = false;
@@ -268,6 +271,20 @@ public class GameLogic {
             System.out.println("Flashlight battery: " + illuminationCounter);
         }
         System.out.println("Moves: " + moveCounter);
+        if(monster.getName().equals("vampire")){
+            if(currentLocation.equals("log cabin") || currentLocation.equals("cafeteria") || currentLocation.equals("school bus")) {
+                monsterMash(monster);
+            }
+        }else if(monster.getName().equals("werewolf")){
+            if(currentLocation.equals("office") || currentLocation.equals("woods") || currentLocation.equals("school bus")) {
+                monsterMash(monster);
+            }
+        }else if(monster.getName().equals("ghost")){
+            if(currentLocation.equals("boys cabin") || currentLocation.equals("infirmary") || currentLocation.equals("school bus")) {
+                monsterMash(monster);
+            }
+        }
+
 
     }
 
@@ -285,6 +302,18 @@ public class GameLogic {
                 }
             }
 
+        }
+    }
+    public static void monsterMash(MonsterSelect monster){
+        Random random = new Random();
+        int randomNum =  random.nextInt(2) + 1;
+        if(randomNum == 1){
+            System.out.println(ANSI_RED + monster.getName() + ": " + monster.getPlayer_loss() + ANSI_RESET);
+            System.out.println("You shake in fear and lose 2 moves.");
+            moveCounter -= 2;
+        }else{
+            System.out.println(ANSI_RED + monster.getName() + ": " + monster.getPlayer_escape() + ANSI_RESET);
+            System.out.println("You barley escaped an attack from the " + monster.getName());
         }
     }
 }
