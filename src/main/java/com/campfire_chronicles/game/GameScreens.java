@@ -74,6 +74,16 @@ public class GameScreens {
         return helpinput;
     }
 
+    public static String getSoundSelect() {
+        String soundInput = SC.next();
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5"));
+        while (!options.contains(soundInput)) {
+            System.out.println("Invalid input, try again. valid inputs are 1 - 5");
+            soundInput = SC.next();
+        }
+        return soundInput;
+    }
+
     /**
      * This method is responsible for getting input the Journal Screen
      * [1,2,3,4]
