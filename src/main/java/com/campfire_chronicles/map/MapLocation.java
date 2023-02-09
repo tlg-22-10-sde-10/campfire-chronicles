@@ -57,8 +57,13 @@ public class MapLocation<S, M> {
         return item;
     }
 
+    public void setItem(String item) {
+        this.item = item;
+    }
+
     public String getDescription() {
         return description;
     }
+
 
 }

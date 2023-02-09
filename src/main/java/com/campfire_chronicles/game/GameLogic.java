@@ -29,6 +29,7 @@ public class GameLogic {
     public static MonsterSelect monster;
     public static String currentLocation = "campfire";
     public static ArrayList<String> inventoryList = new ArrayList<>();
+    private static MapLocation location = new MapLocation(currentLocation);;
 
 
 //    public static String desc;
@@ -102,7 +103,6 @@ public class GameLogic {
     private static void Navigate(String direction) throws NullPointerException {
         String destination = null;
         try {
-            MapLocation location = new MapLocation(currentLocation);
             if (direction.equals("north")) {
                 destination = location.getNorth();
             } else if (direction.equals("east")) {
@@ -116,6 +116,7 @@ public class GameLogic {
             if (destination != null) {
 
                 currentLocation = destination;
+                location = new MapLocation(currentLocation);
                 moveCounter--;
             } else {
                 throw new NullPointerException();
@@ -230,7 +231,6 @@ public class GameLogic {
             System.out.println("the flashlight was used in the search");
         }
         try {
-            MapLocation location = new MapLocation(currentLocation);
             items = location.getItem();
             String delimin = ",";
             StringTokenizer tokenizer = new StringTokenizer(items, delimin);
@@ -239,7 +239,7 @@ public class GameLogic {
                 if (item.equals("energy drink")) {
                     drinkCounter++;
                     System.out.println(item + " was added to your inventory");
-                    if( !inventoryList.contains(item)){
+                   if( !inventoryList.contains(item)){
                         inventoryList.add(item);
                     }
                    ;
@@ -247,9 +247,14 @@ public class GameLogic {
                     if( !inventoryList.contains(item)){
                         inventoryList.add(item);
                         System.out.println(item + " was added to your inventory");
+
                     }
                 }
+
             }
+            location.setItem("");
+            //System.out.println(location.getItem());
+
         } catch (Exception e) {
             System.out.println("nothing here");
         }
@@ -258,7 +263,6 @@ public class GameLogic {
     }
 
     public static void showStatus() throws Exception {
-        MapLocation location = new MapLocation(currentLocation);
         String desc = location.getDescription();
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
