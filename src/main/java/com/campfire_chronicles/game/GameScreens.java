@@ -33,9 +33,9 @@ public class GameScreens {
      */
     public static String getMainMenu() {
         String menuInput = SC.next();
-        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", ""));
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5"));
         while (!options.contains(menuInput)) {
-            System.out.println("Invalid input, try again. valid inputs are 1-4");
+            System.out.println("Invalid input, try again. valid inputs are 1-5");
             menuInput = SC.next();
         }
         return menuInput;
@@ -50,9 +50,9 @@ public class GameScreens {
      */
     public static String getCharacterSelect() {
         String charectorinput = SC.next();
-        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "513"));
         while (!options.contains(charectorinput)) {
-            System.out.println("Invalid input, try again. valid inputs are 1 to 6");
+            System.out.println("Invalid input, try again. valid inputs are 1 to 5");
             charectorinput = SC.next();
         }
         return charectorinput;
@@ -119,7 +119,7 @@ public class GameScreens {
         System.out.println(" --- HELP SCREEN ----");
         System.out.println("Main Menu Options");
         System.out.println("Type 1 to start a New game");
-        System.out.println("Type 2 to get Developer Information");
+        System.out.println("Type 2 to get Game Guide");
         System.out.println("'Type 3 to get to Help screen");
         System.out.println("Type 4 to Quit the game");
         UserInput.helpInput();

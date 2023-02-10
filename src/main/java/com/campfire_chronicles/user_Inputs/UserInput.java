@@ -23,7 +23,7 @@ public class UserInput {
 
     public static void titleInput() throws Exception {
         System.out.println("Please select an option: ");
-        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Sound Settings (select 4)      Quit(select 5)\"\n";
+        String text = "\" New Game (select 1)      Game Guide (select 2)      Help Screen (select 3)      Sound Settings (select 4)      Quit(select 5)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
@@ -39,7 +39,10 @@ public class UserInput {
         if (homePageInput.equals("1")) {
             UserInput.CharacterInput();
         } else if (homePageInput.equals("2")) {
-            System.out.println("Development in progress");
+            System.out.println("Your goal is to escape or Kill the Predator that is Haunting the Camp-ground");
+            System.out.println("You can MOVE around the Campground using cardinal directions SEARCH each area for items and USE those Items");
+            System.out.println("There are Several win scenarios which involve collecting certain items in certain locations and require certain items before you can find them");
+            System.out.println("Developer thoughts : We hope our campground reminds you of the beautiful camp chrystal lake");
             UserInput.helpInput();
         } else if (homePageInput.equals("3")) {
             GameScreens.displayHelp();
@@ -55,7 +58,7 @@ public class UserInput {
     private static void CharacterInput() throws Exception {
         CharacterSelect player = null;
         System.out.println("New Game has been selected");
-        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Easy Kid (select 4)     Back to Main(select 5)   Quit(select 6)");
+        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Back to Main(select 4)   Quit(select 5)");
         UserInput newUserInput = new UserInput();
         System.out.print(">>> ");
         final String CharacterSelectionInput = GameScreens.getCharacterSelect();
@@ -65,15 +68,17 @@ public class UserInput {
             player = new CharacterSelect("2");
         } else if (CharacterSelectionInput.equals("3")) {
             player = new CharacterSelect("3");
-        } else if (CharacterSelectionInput.equals("4")) {
-            player = new CharacterSelect("4");
-        } else if (CharacterSelectionInput.equals("5")) {
+        }
+        else if (CharacterSelectionInput.equals("4")) {
             titleInput();
-        } else if (CharacterSelectionInput.equals("6")) {
+        } else if (CharacterSelectionInput.equals("5")) {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
-        } else {
-            System.out.println("Wrong input, try again by typing a digit from 1-6");
+        }
+        else if(CharacterSelectionInput.equals(("513"))){
+            player = new CharacterSelect("4");
+        }else {
+            System.out.println("Wrong input, try again by typing a digit from 1-5");
         }
         JournalInput(player);
     }
@@ -118,11 +123,11 @@ public class UserInput {
         }
     }
     public static void soundSettings() throws Exception {
-        System.out.println("Mute Background Music(select 1)      Adjust Volume(select 2) ");
+        System.out.println("on/off Background Music(select 1)      Adjust Volume(select 2) ");
         System.out.print(">>> ");
         final String soundPageInput = GameScreens.getHelpSelect();
         if (soundPageInput.equals("1")) {
-            MusicPlayer.stop();
+            MusicPlayer.toggle();
             titleInput();
         } else if (soundPageInput.equals("2")) {
             System.out.println("Adjusting volume [1 - 5]");

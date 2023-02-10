@@ -33,19 +33,26 @@ public class MusicPlayer {
             playing = true;
         }
     }
+
      public void playOnce() {
+        if (playing == true){
         clip.setFramePosition(0);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
         clip.start();
-        playing = true;
+        }
 
         }
 
-    public static void stop() {
-        if (playing) {
+    public static void toggle() {
+        if (playing == true) {
             clip.stop();
             clip.flush();
             playing = false;
+        }
+        else {
+            clip.setFramePosition(0);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+            playing = true;
         }
     }
 }
