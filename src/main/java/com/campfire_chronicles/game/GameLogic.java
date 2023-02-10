@@ -75,8 +75,8 @@ public class GameLogic {
             new MusicPlayer("/game-win.wav").playOnce();
             Thread.sleep(2000);
             System.out.println("congrats! You Win!!");
-            System.out.println("Thank you for playing,\n" +
-                    "stay tuned for sprint 3 where the main character is challenged by the terrible monsters");
+            System.out.println("Thank you for playing,\n");
+
         } else if (gameLose == true || moveCounter < 1) {
             new MusicPlayer("/game-over.wav").playOnce();
             Thread.sleep(500);
@@ -155,11 +155,6 @@ public class GameLogic {
             } else {
                 throw new NullPointerException();
             }
-            if (destination.equals("lake") && inventoryList.contains("baseball bat")) {
-                System.out.println("you used your Big brain and just swam away");
-                gameRunning = false;
-                gameWin = true;
-            }
             showStatus();
         } catch (Exception e) {
             System.out.println("invalid direction");
@@ -174,7 +169,6 @@ public class GameLogic {
                 if (inventoryList.get(i).contains(selection)) {
                     doItemAction(useItem.getAction(), useItem, selection);
                     break;
-
                 }
             }
         } catch (NullPointerException e) {
@@ -203,14 +197,21 @@ public class GameLogic {
                 }
                 break;
             case "unlock":
-                System.out.println("coming soon: Actual Unlock use");
-                System.out.println(itemDetail.getCorrect_use());
+                if (currentLocation.equals("office")) {
+                    System.out.println(itemDetail.getCorrect_use());
+                    inventoryList.add("the colt");
+                    System.out.println("The colt was added to inventory");
+                } else {
+
+                    System.out.println(itemDetail.getIncorrect_use());
+                }
                 break;
             case "swing_bat":
-                if (moveCounter > 10) {
+                if (moveCounter > 10 && currentLocation.equals(office)) {
                     System.out.println(itemDetail.getCorrect_use());
+                    inventoryList.add("the colt");
+                    System.out.println("The colt was added to inventory");
                 } else {
-                    System.out.println("not enough moves");
                     System.out.println(itemDetail.getIncorrect_use());
                 }
                 break;
@@ -218,14 +219,36 @@ public class GameLogic {
                 System.out.println(itemDetail.getCorrect_use());
                 illuminationCounter += 3;
                 break;
+            case "cheat":
+                moveCounter += 999;
+                inventoryList.add("the colt");
+                inventoryList.add("gasoline");
+                inventoryList.add("baseball bat");
+                inventoryList.add("car battery");
+                inventoryList.add("boating manual");
+                System.out.println("several items were added to your inventory type \"status\" to check");
+                inventoryList.remove("golden coin");
+                break;
             case "bus":
                 if (inventoryList.contains("gasoline")
                         && inventoryList.contains("car battery")
                         && currentLocation.equals("school bus")) {
+                    System.out.println(itemDetail.getCorrect_use());
                     gameWin = true;
                     gameRunning = false;
                 } else {
                     System.out.println("You don't quite seem to have all the items you need");
+                }
+                break;
+            case "shoot":
+                if (currentLocation.equals("school bus")){
+                    System.out.println(itemDetail.getCorrect_use());
+                    gameWin = true;
+                    gameRunning = false;
+                }
+                else {
+                    System.out.println(itemDetail.getIncorrect_use());
+                    System.out.println(currentLocation);
                 }
                 break;
             default:
