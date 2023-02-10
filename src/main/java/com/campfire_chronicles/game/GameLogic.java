@@ -27,9 +27,20 @@ public class GameLogic {
     private static int illuminationCounter = 10;
     public static CharacterSelect player;
     public static MonsterSelect monster;
-    public static String currentLocation = "campfire";
     public static ArrayList<String> inventoryList = new ArrayList<>();
-    private static MapLocation location = new MapLocation(currentLocation);;
+    private static MapLocation campfire = new MapLocation("campfire");
+    private static MapLocation boysCabin = new MapLocation("boy's cabin");
+    private static MapLocation girlsCabin = new MapLocation("girl's cabin");
+    private static MapLocation cafeteria = new MapLocation("cafeteria");
+    private static MapLocation infirmary = new MapLocation("infirmary");
+    private static MapLocation gym  = new MapLocation("gym");
+    private static MapLocation office  = new MapLocation("office");
+    private static MapLocation schoolBus  = new MapLocation("school bus");
+    private static MapLocation woods  = new MapLocation("woods");
+    private static MapLocation lake  = new MapLocation("lake");
+    private static MapLocation logCabin  = new MapLocation("log cabin");
+    public static String currentLocation = campfire.getName();
+    public static MapLocation currentMapLocation = campfire;
 
 
 //    public static String desc;
@@ -104,19 +115,42 @@ public class GameLogic {
         String destination = null;
         try {
             if (direction.equals("north")) {
-                destination = location.getNorth();
+                destination = currentMapLocation.getNorth();
             } else if (direction.equals("east")) {
-                destination = location.getEast();
+                destination = currentMapLocation.getEast();
             } else if (direction.equals("south")) {
-                destination = location.getSouth();
+                destination = currentMapLocation.getSouth();
             } else if (direction.equals("west")) {
-                destination = location.getWest();
+                destination = currentMapLocation.getWest();
             }
 
             if (destination != null) {
 
                 currentLocation = destination;
-                location = new MapLocation(currentLocation);
+                MapLocation newLocation = new MapLocation(currentLocation);
+                if(campfire.getId().equals(newLocation.getId())) {
+                    currentMapLocation = campfire;
+                }else if(office.getId().equals(newLocation.getId())) {
+                    currentMapLocation = office;
+                }else if(woods.getId().equals(newLocation.getId())) {
+                    currentMapLocation = woods;
+                }else if(boysCabin.getId().equals(newLocation.getId())) {
+                    currentMapLocation = boysCabin;
+                }else if(girlsCabin.getId().equals(newLocation.getId())) {
+                    currentMapLocation = girlsCabin;
+                }else if(lake.getId().equals(newLocation.getId())) {
+                    currentMapLocation = lake;
+                }else if(logCabin.getId().equals(newLocation.getId())) {
+                    currentMapLocation = logCabin;
+                }else if(schoolBus.getId().equals(newLocation.getId())) {
+                    currentMapLocation = schoolBus;
+                }else if(cafeteria.getId().equals(newLocation.getId())) {
+                    currentMapLocation = cafeteria;
+                }else if(infirmary.getId().equals(newLocation.getId())) {
+                    currentMapLocation = infirmary;
+                }else if(gym.getId().equals(newLocation.getId())) {
+                    currentMapLocation = gym;
+                }
                 moveCounter--;
             } else {
                 throw new NullPointerException();
@@ -231,7 +265,7 @@ public class GameLogic {
             System.out.println("the flashlight was used in the search");
         }
         try {
-            items = location.getItem();
+            items = currentMapLocation.getItem();
             String delimin = ",";
             StringTokenizer tokenizer = new StringTokenizer(items, delimin);
             while (tokenizer.hasMoreTokens()) {
@@ -252,7 +286,7 @@ public class GameLogic {
                 }
 
             }
-            location.setItem("");
+            currentMapLocation.setItem("");
             //System.out.println(location.getItem());
 
         } catch (Exception e) {
@@ -263,7 +297,7 @@ public class GameLogic {
     }
 
     public static void showStatus() throws Exception {
-        String desc = location.getDescription();
+        String desc = currentMapLocation.getDescription();
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
         System.out.println("Description: " + desc);
