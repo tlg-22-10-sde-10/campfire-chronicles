@@ -9,6 +9,8 @@ import java.io.Reader;
 import java.util.Map;
 
 public class MapLocation<S, M> {
+    private String name;
+    private String id;
     private String north;
     private String east;
     private String south;
@@ -29,12 +31,20 @@ public class MapLocation<S, M> {
 
     public MapLocation(String selection){
         MapLocation location = mapperMap.get(selection);
+        this.name = location.name;
+        this.id = location.id;
         this.north = location.north;
         this.east = location.east;
         this.south = location.south;
         this.west = location.west;
         this.item = location.item;
         this.description = location.description;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getId() {
+        return id;
     }
 
     public String getNorth() {
@@ -65,5 +75,7 @@ public class MapLocation<S, M> {
         return description;
     }
 
-
+    public static void main(String[] args) {
+        new MapLocation<>("campfire").getDescription();
+    }
 }
