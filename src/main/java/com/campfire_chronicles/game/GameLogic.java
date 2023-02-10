@@ -24,7 +24,7 @@ public class GameLogic {
     public static boolean illumination = false;
     public static int moveCounter;
     private static int drinkCounter;
-    private static int illuminationCounter = 10;
+    private static int illuminationCounter = 3;
     public static CharacterSelect player;
     public static MonsterSelect monster;
     public static ArrayList<String> inventoryList = new ArrayList<>();
@@ -60,12 +60,6 @@ public class GameLogic {
         GameScreens.inGameHelp();
         System.out.println();
         do {
-            if (illumination == true) {
-                illuminationCounter--;
-                if (illuminationCounter < 1) {
-                    illumination = false;
-                }
-            }
             String command = UserInput.getAction();
             processCommand(command);
         }
@@ -125,7 +119,6 @@ public class GameLogic {
             }
 
             if (destination != null) {
-
                 currentLocation = destination;
                 MapLocation newLocation = new MapLocation(currentLocation);
                 if(campfire.getId().equals(newLocation.getId())) {
@@ -155,6 +148,8 @@ public class GameLogic {
             } else {
                 throw new NullPointerException();
             }
+
+           // new MusicPlayer("/foot-steps.wav").playOnce();
             showStatus();
         } catch (Exception e) {
             System.out.println("invalid direction");
@@ -251,6 +246,16 @@ public class GameLogic {
                     System.out.println(currentLocation);
                 }
                 break;
+            case "read":
+                if (inventoryList.contains("boating manual")
+                        && currentLocation.equals("lake")) {
+                    System.out.println(itemDetail.getCorrect_use());
+                    gameWin = true;
+                    gameRunning = false;
+                } else {
+                    System.out.println("You don't quite seem to have all the items you need");
+                }
+                break;
             default:
                 System.out.println("invalid action");
         }
@@ -284,8 +289,17 @@ public class GameLogic {
     private static void SearchRoom() throws Exception {
         String items;
         moveCounter--;
-        if (illumination == true) {
+        if (illumination == true){
             System.out.println("the flashlight was used in the search");
+            illuminationCounter--;
+            if (illuminationCounter < 1) {
+                illumination = false;
+            }
+                drinkCounter++;
+                System.out.println("energy drink was added to your inventory");
+                if( !inventoryList.contains("energy drink")){
+                    inventoryList.add("energy drink");
+                }
         }
         try {
             items = currentMapLocation.getItem();
