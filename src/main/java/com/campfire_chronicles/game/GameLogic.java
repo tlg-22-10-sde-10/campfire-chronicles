@@ -149,7 +149,7 @@ public class GameLogic {
                 throw new NullPointerException();
             }
 
-           // new MusicPlayer("/foot-steps.wav").playOnce();
+            new MusicPlayer("/foot-steps.wav").playOnce();
             showStatus();
         } catch (Exception e) {
             System.out.println("invalid direction");
