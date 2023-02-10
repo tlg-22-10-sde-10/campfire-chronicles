@@ -2,15 +2,17 @@ package com.campfire_chronicles.music;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.net.URL;
 
 public class MusicPlayer {
     private static Clip clip;
     private static boolean playing = false;
 
-    public MusicPlayer(String file) {
+    public MusicPlayer(String path) {
         try {
+            URL file = getClass().getResource(path);
 
-            AudioInputStream sound = AudioSystem.getAudioInputStream(MusicPlayer.class.getResourceAsStream(file));
+            AudioInputStream sound = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(sound);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {

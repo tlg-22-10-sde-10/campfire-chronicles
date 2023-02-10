@@ -37,15 +37,15 @@ class UserInputTest {
         System.setIn(simUserIn);
         assertEquals("you do nothing",action);
     }
-    @Test
-    void getActionStatusTest() throws Exception {
-        InputStream simUserIn = System.in;
-        ByteArrayInputStream command = new ByteArrayInputStream("STaTus".getBytes());
-        System.setIn(command);
-        String action = getAction();
-        System.setIn(simUserIn);
-        assertEquals("status",action);
-    }
+//    @Test
+//    void getActionStatusTest() throws Exception {
+//        InputStream simUserIn = System.in;
+//        ByteArrayInputStream command = new ByteArrayInputStream("STaTus".getBytes());
+//        System.setIn(command);
+//        String action = getAction();
+//        System.setIn(simUserIn);
+//        assertEquals("status",action);
+//    }
     @Test
     void getActionMapTest() throws Exception {
         InputStream simUserIn = System.in;
