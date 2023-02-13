@@ -71,9 +71,9 @@ public class GameScreens {
      */
     public static String getCharacterSelect() {
         String charectorinput = SC.next();
-        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "513"));
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "513"));
         while (!options.contains(charectorinput)) {
-            System.out.println("Invalid input, try again. valid inputs are 1 to 4");
+            System.out.println("Invalid input, try again. valid inputs are 1 to 5");
             charectorinput = SC.next();
         }
         return charectorinput;
