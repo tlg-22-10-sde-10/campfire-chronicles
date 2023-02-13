@@ -5,11 +5,11 @@ import com.campfire_chronicles.item.Item;
 import com.campfire_chronicles.map.MapLocation;
 import com.campfire_chronicles.monster.MonsterSelect;
 import com.campfire_chronicles.music.MusicPlayer;
+import com.campfire_chronicles.read_external.ReadExternalFiles;
 import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringTokenizer;
@@ -18,6 +18,8 @@ public class GameLogic {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_Green = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public static boolean gameRunning = true;
     public static boolean gameWin = false;
     public static boolean gameLose = false;
@@ -68,14 +70,14 @@ public class GameLogic {
         if (gameWin == true && moveCounter > 0) {
             new MusicPlayer("/game-win.wav").playOnce();
             Thread.sleep(2000);
-            System.out.println("congrats! You Win!!");
-            System.out.println("Thank you for playing,\n");
+            GameScreens.showWin();
+            System.out.println("\nThank you for playing,\n");
 
         } else if (gameLose == true || moveCounter < 1) {
             new MusicPlayer("/game-over.wav").playOnce();
             Thread.sleep(500);
-            System.out.println("Sorry! You Lose!!");
-            System.out.println("Thanks for playing our Game");
+            GameScreens.showLose();
+            System.out.println("\nThanks for playing our Game");
         }
     }
 
@@ -185,7 +187,7 @@ public class GameLogic {
                 moveCounter += 3;
                 new MusicPlayer("/drink-soda.wav").playOnce();
                 System.out.println(itemDetail.getCorrect_use());
-                System.out.println("+3 moves");
+                System.out.println(ANSI_CYAN +"+3 moves"+ ANSI_RESET);
                 drinkCounter--;
                 if (drinkCounter < 1) {
                     inventoryList.remove("energy drink");
@@ -384,11 +386,11 @@ public class GameLogic {
         int randomNum =  random.nextInt(2) + 1;
         if(randomNum == 1){
             System.out.println(ANSI_RED + monster.getName() + ": " + monster.getPlayer_loss() + ANSI_RESET);
-            System.out.println("You shake in fear and lose 2 moves.");
+            System.out.println(ANSI_RED+"You shake in fear and lose 2 moves."+ANSI_RESET);
             moveCounter -= 2;
         }else{
             System.out.println(ANSI_RED + monster.getName() + ": " + monster.getPlayer_escape() + ANSI_RESET);
-            System.out.println("You barley escaped an attack from the " + monster.getName());
+            System.out.println(ANSI_BLUE+"You barley escaped an attack from the " + monster.getName()+"."+ANSI_RESET);
         }
     }
 }

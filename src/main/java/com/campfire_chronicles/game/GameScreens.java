@@ -1,5 +1,6 @@
 package com.campfire_chronicles.game;
 
+import com.campfire_chronicles.read_external.ReadExternalFiles;
 import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 public class GameScreens {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_Green = "\u001B[32m";
     private static final Scanner SC = new Scanner(System.in);
 
     /* shows the game tile screen and options */
@@ -22,7 +24,24 @@ public class GameScreens {
                 System.out.println(ANSI_RED + title + ANSI_RESET);
             }
         }
-
+    }
+    public static void showWin() throws Exception {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("win.txt")))) {
+            String title;
+            //Condition holds true till there is character in a string
+            while ((title = reader.readLine()) != null) {
+                System.out.println(ANSI_Green + title + ANSI_RESET);
+            }
+        }
+    }
+    public static void showLose() throws Exception {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("lose.txt")))) {
+            String title;
+            //Condition holds true till there is character in a string
+            while ((title = reader.readLine()) != null) {
+                System.out.println(ANSI_RED + title + ANSI_RESET);
+            }
+        }
     }
 
     /**
@@ -126,18 +145,19 @@ public class GameScreens {
     }
 
     public static void inGameHelp() throws Exception {
-        System.out.println(" --- HELP SCREEN ----");
-        System.out.println("Valid Commands -\n" +
-                "Move/go(used to Navigate Map)\n" +
-                "Look Item(Provides description of item)\n" +
-                "Use Items\n" +
-                "Help (Camp Counselor)\n" +
-                "Map(Shows current location on map)\n"+
-                "Search(looks around the room)\n"+
-                "Status(show location/inventory)\n" +
-                "quit(Give Up)\n");
-        System.out.println("Correct Syntax would be move north/south/east/west\n"
-                + "Use bat\n"+ "look at bat\n"+"Map\n");
+        ReadExternalFiles.readText("inGameHelp.txt");
+//        System.out.println(" --- HELP SCREEN ----");
+//        System.out.println("Valid Commands -\n" +
+//                "Move/go(used to Navigate Map)\n" +
+//                "Look Item(Provides description of item)\n" +
+//                "Use Items\n" +
+//                "Help (Camp Counselor)\n" +
+//                "Map(Shows current location on map)\n"+
+//                "Search(looks around the room)\n"+
+//                "Status(show location/inventory)\n" +
+//                "quit(Give Up)\n");
+//        System.out.println("Correct Syntax would be move north/south/east/west\n"
+//                + "Use bat\n"+ "look at bat\n"+"Map\n");
 
 
     }
