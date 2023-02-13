@@ -196,7 +196,9 @@ public class GameLogic {
             case "unlock":
                 if (currentLocation.equals("office")) {
                     System.out.println(itemDetail.getCorrect_use());
-                    inventoryList.add("the colt");
+                    if( !inventoryList.contains("the colt")){
+                        inventoryList.add("the colt");
+                    }
                     System.out.println("The colt was added to inventory");
                 } else {
 
@@ -204,9 +206,11 @@ public class GameLogic {
                 }
                 break;
             case "swing_bat":
-                if (moveCounter > 10 && currentLocation.equals(office)) {
+                if (moveCounter > 10 && currentLocation.equals("office")) {
                     System.out.println(itemDetail.getCorrect_use());
-                    inventoryList.add("the colt");
+                    if( !inventoryList.contains("the colt")){
+                        inventoryList.add("the colt");
+                    }
                     System.out.println("The colt was added to inventory");
                 } else {
                     System.out.println(itemDetail.getIncorrect_use());
@@ -219,6 +223,7 @@ public class GameLogic {
             case "cheat":
                 moveCounter += 999;
                 inventoryList.add("the colt");
+                inventoryList.add("hairpin");
                 inventoryList.add("gasoline");
                 inventoryList.add("baseball bat");
                 inventoryList.add("car battery");
@@ -349,15 +354,15 @@ public class GameLogic {
         }
         System.out.println("Moves: " + moveCounter);
         if(monster.getName().equals("vampire")){
-            if(currentLocation.equals("log cabin") || currentLocation.equals("cafeteria") || currentLocation.equals("school bus")) {
+            if(currentLocation.equals("log cabin") || currentLocation.equals("cafeteria")|| currentLocation.equals("lake")  || currentLocation.equals("school bus")) {
                 monsterMash(monster);
             }
         }else if(monster.getName().equals("werewolf")){
-            if(currentLocation.equals("office") || currentLocation.equals("woods") || currentLocation.equals("school bus")) {
+            if(currentLocation.equals("office") || currentLocation.equals("woods") || currentLocation.equals("lake") || currentLocation.equals("school bus")) {
                 monsterMash(monster);
             }
         }else if(monster.getName().equals("ghost")){
-            if(currentLocation.equals("boys cabin") || currentLocation.equals("infirmary") || currentLocation.equals("school bus")) {
+            if(currentLocation.equals("boys cabin") || currentLocation.equals("infirmary") || currentLocation.equals("lake") || currentLocation.equals("school bus")) {
                 monsterMash(monster);
             }
         }

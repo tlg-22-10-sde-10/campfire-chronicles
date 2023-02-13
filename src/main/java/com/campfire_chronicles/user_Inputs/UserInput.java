@@ -28,12 +28,12 @@ public class UserInput {
 
     public static void titleInput() throws Exception {
         System.out.println("Please select an option: ");
-        String text = "\" New Game (select 1)      Game Guide (select 2)      Help Screen (select 3)      Sound Settings (select 4)      Quit(select 5)\"\n";
+        String text = "\" New Game (select 1)      Game Guide (select 2)      Sound Settings (select 3)      Quit(select 4)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
             try {
-                Thread.sleep(5);//0.5s pause between characters
+                Thread.sleep(10);//0.5s pause between characters
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
@@ -50,11 +50,9 @@ public class UserInput {
             System.out.println("Developer thoughts : We hope our campground reminds you of the beautiful camp chrystal lake");
             UserInput.helpInput();
         } else if (homePageInput.equals("3")) {
-            GameScreens.displayHelp();
-        } else if (homePageInput.equals("4")) {
             soundSettings();
           UserInput.helpInput();
-        }else if (homePageInput.equals("5")) {
+        }else if (homePageInput.equals("4")) {
         } else {
             System.out.println("Wrong input, try again by typing a digit from 1-4");
         }
@@ -62,8 +60,16 @@ public class UserInput {
 
     private static void CharacterInput() throws Exception {
         CharacterSelect player = null;
-        System.out.println("New Game has been selected");
-        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Back to Main(select 4)   Quit(select 5)");
+        System.out.println("New Game has been selected : Choose your Character");
+        String text = "\" Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Back to Main(select 4)   Quit(select 5))\"\n";
+        for (int i = 0; i < text.length(); i++) {
+            System.out.printf("%c", text.charAt(i));
+            try {
+                Thread.sleep(10);//0.5s pause between characters
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
         UserInput newUserInput = new UserInput();
         System.out.print(">>> ");
         final String CharacterSelectionInput = GameScreens.getCharacterSelect();

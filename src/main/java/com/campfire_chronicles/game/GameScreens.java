@@ -25,6 +25,7 @@ public class GameScreens {
             }
         }
     }
+
     public static void showWin() throws Exception {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("win.txt")))) {
             String title;
@@ -34,6 +35,7 @@ public class GameScreens {
             }
         }
     }
+
     public static void showLose() throws Exception {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(GameScreens.class.getClassLoader().getResourceAsStream("lose.txt")))) {
             String title;
@@ -69,9 +71,9 @@ public class GameScreens {
      */
     public static String getCharacterSelect() {
         String charectorinput = SC.next();
-        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "513"));
+        final Set<String> options = new HashSet<>(Arrays.asList("1", "2", "3", "4", "513"));
         while (!options.contains(charectorinput)) {
-            System.out.println("Invalid input, try again. valid inputs are 1 to 5");
+            System.out.println("Invalid input, try again. valid inputs are 1 to 4");
             charectorinput = SC.next();
         }
         return charectorinput;
@@ -118,6 +120,7 @@ public class GameScreens {
         }
         return journalinput;
     }
+
     /**
      * This method is responsible for getting input the Help Screen
      * [1,2]
@@ -134,34 +137,10 @@ public class GameScreens {
         return quitinput;
     }
 
-    public static void displayHelp() throws Exception {
-        System.out.println(" --- HELP SCREEN ----");
-        System.out.println("Main Menu Options");
-        System.out.println("Type 1 to start a New game");
-        System.out.println("Type 2 to get Game Guide");
-        System.out.println("'Type 3 to get to Help screen");
-        System.out.println("Type 4 to Quit the game");
-        UserInput.helpInput();
-    }
 
     public static void inGameHelp() throws Exception {
         ReadExternalFiles.readText("inGameHelp.txt");
-//        System.out.println(" --- HELP SCREEN ----");
-//        System.out.println("Valid Commands -\n" +
-//                "Move/go(used to Navigate Map)\n" +
-//                "Look Item(Provides description of item)\n" +
-//                "Use Items\n" +
-//                "Help (Camp Counselor)\n" +
-//                "Map(Shows current location on map)\n"+
-//                "Search(looks around the room)\n"+
-//                "Status(show location/inventory)\n" +
-//                "quit(Give Up)\n");
-//        System.out.println("Correct Syntax would be move north/south/east/west\n"
-//                + "Use bat\n"+ "look at bat\n"+"Map\n");
-
-
     }
-
 
 
 }
