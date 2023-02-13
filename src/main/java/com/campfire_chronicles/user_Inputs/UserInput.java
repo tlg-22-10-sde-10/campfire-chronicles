@@ -18,6 +18,11 @@ import static com.campfire_chronicles.game.GameLogic.showStatus;
 import static com.campfire_chronicles.game.GameScreens.inGameHelp;
 
 public class UserInput {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
     public UserInput() {
     }
 
@@ -87,7 +92,7 @@ public class UserInput {
         MonsterSelect monster = null;
         ReadExternalFiles.readText("Opening.txt");
         System.out.println("\nYou pick to read:");
-        System.out.println("Red Journal  (select 1)      Brown Journal (select 2)      Blue Journal (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
+        System.out.println(ANSI_RED +"Red Journal  (select 1)" +ANSI_YELLOW+"      Brown Journal (select 2)"+ANSI_BLUE+"      Blue Journal (select 3)"+ANSI_RESET+"      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         System.out.print(">>> ");
         final String JournalSelectionInput = GameScreens.getJournalSelect();
         if (JournalSelectionInput.equals("1")) {
