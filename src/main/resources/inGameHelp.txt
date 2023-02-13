@@ -1,0 +1,18 @@
+------------------------------
+     --- HELP SCREEN ----
+     Valid Commands:
+  Move/go(used to Navigate Map)
+  Look "Item" (Provides description of item)
+  Use "Items"
+  Help (Camp Counselor)
+  Map(Shows current location on map)
+  Search(looks around the room)
+  Status(show location/inventory)
+  Quit(Give Up)
+
+  Correct Syntax would be:
+  -move north/south/east/west
+  -use bat
+  -look bat
+  -map
+------------------------------

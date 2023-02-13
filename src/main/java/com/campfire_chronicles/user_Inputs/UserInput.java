@@ -3,6 +3,8 @@ package com.campfire_chronicles.user_Inputs;
 import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.game.GameLogic;
 import com.campfire_chronicles.game.GameScreens;
+import com.campfire_chronicles.monster.MonsterSelect;
+import com.campfire_chronicles.music.MusicPlayer;
 import com.campfire_chronicles.read_external.ReadExternalFiles;
 
 import java.io.BufferedReader;
@@ -16,17 +18,22 @@ import static com.campfire_chronicles.game.GameLogic.showStatus;
 import static com.campfire_chronicles.game.GameScreens.inGameHelp;
 
 public class UserInput {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
     public UserInput() {
     }
 
     public static void titleInput() throws Exception {
         System.out.println("Please select an option: ");
-        String text = "\" New Game (select 1)      Developer Information (select 2)      Help Screen (select 3)      Quit(select 4)\"\n";
+        String text = "\" New Game (select 1)      Game Guide (select 2)      Sound Settings (select 3)      Quit(select 4)\"\n";
         //Iterating String and printing one character at a time.
         for (int i = 0; i < text.length(); i++) {
             System.out.printf("%c", text.charAt(i));
             try {
-                Thread.sleep(5);//0.5s pause between characters
+                Thread.sleep(10);//0.5s pause between characters
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
@@ -37,11 +44,15 @@ public class UserInput {
         if (homePageInput.equals("1")) {
             UserInput.CharacterInput();
         } else if (homePageInput.equals("2")) {
-            System.out.println("Development in progress");
+            System.out.println("Your goal is to escape or Kill the Predator that is Haunting the Camp-ground");
+            System.out.println("You can MOVE around the Campground using cardinal directions SEARCH each area for items and USE those Items");
+            System.out.println("There are Several win scenarios which involve collecting certain items in certain locations and require certain items before you can find them");
+            System.out.println("Developer thoughts : We hope our campground reminds you of the beautiful camp chrystal lake");
             UserInput.helpInput();
         } else if (homePageInput.equals("3")) {
-            GameScreens.displayHelp();
-        } else if (homePageInput.equals("4")) {
+            soundSettings();
+          UserInput.helpInput();
+        }else if (homePageInput.equals("4")) {
         } else {
             System.out.println("Wrong input, try again by typing a digit from 1-4");
         }
@@ -49,8 +60,16 @@ public class UserInput {
 
     private static void CharacterInput() throws Exception {
         CharacterSelect player = null;
-        System.out.println("New Game has been selected");
-        System.out.println("Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Easy Kid (select 4)     Back to Main(select 5)   Quit(select 6)");
+        System.out.println("New Game has been selected : Choose your Character");
+        String text = "\" Jock  (select 1)      Popular Girl (select 2)      Band Camp Nerd (select 3)      Back to Main(select 4)   Quit(select 5))\"\n";
+        for (int i = 0; i < text.length(); i++) {
+            System.out.printf("%c", text.charAt(i));
+            try {
+                Thread.sleep(10);//0.5s pause between characters
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
         UserInput newUserInput = new UserInput();
         System.out.print(">>> ");
         final String CharacterSelectionInput = GameScreens.getCharacterSelect();
@@ -60,31 +79,37 @@ public class UserInput {
             player = new CharacterSelect("2");
         } else if (CharacterSelectionInput.equals("3")) {
             player = new CharacterSelect("3");
-        } else if (CharacterSelectionInput.equals("4")) {
-            player = new CharacterSelect("4");
-        } else if (CharacterSelectionInput.equals("5")) {
+        }
+        else if (CharacterSelectionInput.equals("4")) {
             titleInput();
-        } else if (CharacterSelectionInput.equals("6")) {
+        } else if (CharacterSelectionInput.equals("5")) {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
-        } else {
-            System.out.println("Wrong input, try again by typing a digit from 1-6");
+        }
+        else if(CharacterSelectionInput.equals(("513"))){
+            player = new CharacterSelect("4");
+        }else {
+            System.out.println("Wrong input, try again by typing a digit from 1-5");
         }
         JournalInput(player);
     }
 /*Need to fix method in ReadExternalFiles*/
     private static void JournalInput(CharacterSelect player) throws Exception {
+        MonsterSelect monster = null;
         ReadExternalFiles.readText("Opening.txt");
         System.out.println("\nYou pick to read:");
-        System.out.println("Red Journal  (select 1)      Brown Journal (select 2)      Blue Journal (select 3)      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
+        System.out.println(ANSI_RED +"Red Journal  (select 1)" +ANSI_YELLOW+"      Brown Journal (select 2)"+ANSI_BLUE+"      Blue Journal (select 3)"+ANSI_RESET+"      Back to Character Selection (select 4)     Back to Main(select 5)   Quit(select 6)");
         System.out.print(">>> ");
         final String JournalSelectionInput = GameScreens.getJournalSelect();
         if (JournalSelectionInput.equals("1")) {
-            System.out.println("Suddenly, as you flip through the pages, a swarm of bats flew out of the journal, swarming all around you.\n In the midst of the chaos, a figure appeared, shrouded in darkness. A Vampire has appeared.");
+            monster = new MonsterSelect("1");
+            System.out.println(monster.getIntro());
         } else if (JournalSelectionInput.equals("2")) {
-            System.out.println("When you open the journal and hear a howl that echoes through the forest, bouncing off the trees and lingering in the air long after the sound has died down.\n Suddenly a large figure emerges from the shadow. Its fur standing on end and its eyes glowing in the dark. A Werewolf has appeared.");
+            monster = new MonsterSelect("2");
+            System.out.println(monster.getIntro());
         } else if (JournalSelectionInput.equals("3")) {
-            System.out.println("As you open the journal two translucent hands reach out to grab you. You dropped the journal and watch a ghostly figure emerge from the journal and take shape before you eyes. A Ghost has appeared");
+            monster = new MonsterSelect("3");
+            System.out.println(monster.getIntro());
         } else if (JournalSelectionInput.equals("4")) {
             CharacterInput();
         } else if (JournalSelectionInput.equals("5")) {
@@ -93,7 +118,7 @@ public class UserInput {
             System.out.println("Thanks for Playing our Game");
             System.exit(0);
         }
-        GameLogic.startGame(player);
+        GameLogic.startGame(player, monster);
     }
 
     public static void helpInput() throws Exception {
@@ -106,6 +131,35 @@ public class UserInput {
         } else if (helpPageInput.equals("2")) {
             System.out.println("Thanks for playing");
 
+        }
+    }
+    public static void soundSettings() throws Exception {
+        System.out.println("on/off Background Music(select 1)      Adjust Volume(select 2) ");
+        System.out.print(">>> ");
+        final String soundPageInput = GameScreens.getHelpSelect();
+        if (soundPageInput.equals("1")) {
+            MusicPlayer.toggle();
+            titleInput();
+        } else if (soundPageInput.equals("2")) {
+            System.out.println("Adjusting volume [1 - 5]");
+            System.out.print(">>> ");
+            final String volumeInput = GameScreens.getSoundSelect();
+            if (volumeInput.equals("1")) {
+                MusicPlayer.setVolume(-10.0f);
+            }
+            else if (volumeInput.equals("2")) {
+                MusicPlayer.setVolume(-8.0f);
+            }
+            else if (volumeInput.equals("3")) {
+                MusicPlayer.setVolume(-6.0f);
+            }
+            else if (volumeInput.equals("4")) {
+                MusicPlayer.setVolume(-5.0f);
+            }
+            else if (volumeInput.equals("5")) {
+                titleInput();
+            }
+            titleInput();
         }
     }
 

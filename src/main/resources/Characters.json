@@ -26,7 +26,7 @@
     "perception": 1,
     "strength": 1,
     "wisdom": 3,
-    "item": "flashlight",
+    "item": "boating manual",
     "description": "The Band Camp Nerd is a talented musician and a bit of a loner. They're smart and observant, with a strong passion for their craft. Despite their lack of social skills, they have a kind heart and a unique perspective on the world."
   },
   "4": {
@@ -36,7 +36,7 @@
     "perception": 3,
     "strength": 3,
     "wisdom": 3,
-    "item": "Golden Coin",
+    "item": "golden coin",
     "description": "The Easy Kid is a laid-back and carefree individual. They're charming and adaptable, able to get along with just about anyone. Despite their relaxed demeanor, they have a sharp mind and a talent for problem-solving."
   }
 }

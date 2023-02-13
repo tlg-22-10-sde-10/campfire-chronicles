@@ -2,7 +2,7 @@
   "bat": {
     "name": "bat",
     "description": "made of wood",
-    "correct_use": "you swing the bat, wow something really cool happens!!",
+    "correct_use": "you swing the bat, and are somehow able to smash the counselors safe... theres a gun in it",
     "incorrect_use": "you swing the bat... nothing happens",
     "action": "swing_bat"
   },
@@ -16,8 +16,8 @@
   "hairpin": {
     "name": "hairpin",
     "description": "small U-shaped hair accessory used to hold hair in place by pinning it up or creating loops and twists.",
-    "correct_use": "you're able to unlock the door using the hairpin",
-    "incorrect_use": "the hairpin cant be use right now",
+    "correct_use": "you've been eyeing the counselors safe for weeks, here's your chance to pick the lock",
+    "incorrect_use": "sorry no locks to pick",
     "action": "unlock"
   },
   "drink": {
@@ -36,16 +36,38 @@
   },
   "gasoline": {
     "name": "gasoline",
-    "description": "this looks like it could be used to power som sort of vehicle",
+    "description": "this looks like it could be used to power some sort of vehicle",
     "correct_use": "you replace the bus battery, gas it up, and drive off into the sunset",
     "incorrect_use": "this looks like it could be used to power som sort of vehicle",
     "action": "bus"
   },
   "battery": {
     "name": "battery",
-    "description": "this looks like it could be used to power som sort of vehicle",
+    "description": "this looks like it could be used to power some sort of vehicle",
     "correct_use": "you replace the bus battery, gas it up, and drive off into the sunset",
     "incorrect_use": "this looks like it could be used to power som sort of vehicle",
     "action": "bus"
+  },
+  "coin": {
+    "name": "golden coin",
+    "description": "solid gold very shiny... also has weird glowing symbols floating around it",
+    "correct_use": "you hold the coin out and it suddenly sinks into your palm, i wonder what happened",
+    "incorrect_use": "there is no incorrect use of this item",
+    "action": "cheat"
+  },
+   "colt": {
+    "name": "colt",
+    "description": "According to legend, anything shot by this gun, would die, including supernatural creatures",
+    "correct_use": "Bam, Pow, and other comic book sounds the monster is dead",
+    "incorrect_use": "be careful, you'll shoot your eye out",
+    "action": "shoot"
+  },
+"manual": {
+    "name": "manual",
+    "description": "scouts guide to all things boating, including how to start up an old lake boat",
+    "correct_use": "all aboard Boaty McBoatface",
+    "incorrect_use": "sorry no boats here",
+    "action": "read"
   }
+
 }

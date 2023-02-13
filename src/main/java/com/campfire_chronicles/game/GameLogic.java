@@ -3,26 +3,47 @@ package com.campfire_chronicles.game;
 import com.campfire_chronicles.character.CharacterSelect;
 import com.campfire_chronicles.item.Item;
 import com.campfire_chronicles.map.MapLocation;
+import com.campfire_chronicles.monster.MonsterSelect;
+import com.campfire_chronicles.music.MusicPlayer;
+import com.campfire_chronicles.read_external.ReadExternalFiles;
 import com.campfire_chronicles.user_Inputs.UserInput;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 public class GameLogic {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_Green = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public static boolean gameRunning = true;
     public static boolean gameWin = false;
     public static boolean gameLose = false;
     public static boolean illumination = false;
     public static int moveCounter;
     private static int drinkCounter;
-    private static int illuminationCounter = 10;
+    private static int illuminationCounter = 3;
     public static CharacterSelect player;
-    public static String currentLocation = "campfire";
+    public static MonsterSelect monster;
     public static ArrayList<String> inventoryList = new ArrayList<>();
+    private static MapLocation campfire = new MapLocation("campfire");
+    private static MapLocation boysCabin = new MapLocation("boy's cabin");
+    private static MapLocation girlsCabin = new MapLocation("girl's cabin");
+    private static MapLocation cafeteria = new MapLocation("cafeteria");
+    private static MapLocation infirmary = new MapLocation("infirmary");
+    private static MapLocation gym  = new MapLocation("gym");
+    private static MapLocation office  = new MapLocation("office");
+    private static MapLocation schoolBus  = new MapLocation("school bus");
+    private static MapLocation woods  = new MapLocation("woods");
+    private static MapLocation lake  = new MapLocation("lake");
+    private static MapLocation logCabin  = new MapLocation("log cabin");
+    public static String currentLocation = campfire.getName();
+    public static MapLocation currentMapLocation = campfire;
+
 
 //    public static String desc;
 
@@ -30,8 +51,9 @@ public class GameLogic {
     public GameLogic() throws Exception {
     }
 
-    public static void startGame(CharacterSelect userChoice) throws Exception {
-        player = userChoice;
+    public static void startGame(CharacterSelect userCharacter, MonsterSelect userMonster) throws Exception {
+        player = userCharacter;
+        monster = userMonster;
         String inventory = player.getInventory();
         System.out.println("inventory: " + inventory);
         moveCounter = 10;
@@ -40,24 +62,22 @@ public class GameLogic {
         GameScreens.inGameHelp();
         System.out.println();
         do {
-            if (illumination == true) {
-                illuminationCounter--;
-                if (illuminationCounter < 1) {
-                    illumination = false;
-                }
-            }
             String command = UserInput.getAction();
             processCommand(command);
         }
-        while (gameRunning == true && moveCounter >= 0);
+        while (gameRunning == true && moveCounter > 0);
         System.out.println();
         if (gameWin == true && moveCounter > 0) {
-            System.out.println("congrats! You Win!!");
-            System.out.println("Thank you for playing,\n" +
-                    "stay tuned for sprint 3 where the main character is challenged by the terrible monsters");
+            new MusicPlayer("/game-win.wav").playOnce();
+            Thread.sleep(2000);
+            GameScreens.showWin();
+            System.out.println("\nThank you for playing,\n");
+
         } else if (gameLose == true || moveCounter < 1) {
-            System.out.println("Sorry! You Lose!!");
-            System.out.println("Thanks for playing our Game");
+            new MusicPlayer("/game-over.wav").playOnce();
+            Thread.sleep(500);
+            GameScreens.showLose();
+            System.out.println("\nThanks for playing our Game");
         }
     }
 
@@ -90,29 +110,48 @@ public class GameLogic {
     private static void Navigate(String direction) throws NullPointerException {
         String destination = null;
         try {
-            MapLocation location = new MapLocation(currentLocation);
             if (direction.equals("north")) {
-                destination = location.getNorth();
+                destination = currentMapLocation.getNorth();
             } else if (direction.equals("east")) {
-                destination = location.getEast();
+                destination = currentMapLocation.getEast();
             } else if (direction.equals("south")) {
-                destination = location.getSouth();
+                destination = currentMapLocation.getSouth();
             } else if (direction.equals("west")) {
-                destination = location.getWest();
+                destination = currentMapLocation.getWest();
             }
 
             if (destination != null) {
-
                 currentLocation = destination;
+                MapLocation newLocation = new MapLocation(currentLocation);
+                if(campfire.getId().equals(newLocation.getId())) {
+                    currentMapLocation = campfire;
+                }else if(office.getId().equals(newLocation.getId())) {
+                    currentMapLocation = office;
+                }else if(woods.getId().equals(newLocation.getId())) {
+                    currentMapLocation = woods;
+                }else if(boysCabin.getId().equals(newLocation.getId())) {
+                    currentMapLocation = boysCabin;
+                }else if(girlsCabin.getId().equals(newLocation.getId())) {
+                    currentMapLocation = girlsCabin;
+                }else if(lake.getId().equals(newLocation.getId())) {
+                    currentMapLocation = lake;
+                }else if(logCabin.getId().equals(newLocation.getId())) {
+                    currentMapLocation = logCabin;
+                }else if(schoolBus.getId().equals(newLocation.getId())) {
+                    currentMapLocation = schoolBus;
+                }else if(cafeteria.getId().equals(newLocation.getId())) {
+                    currentMapLocation = cafeteria;
+                }else if(infirmary.getId().equals(newLocation.getId())) {
+                    currentMapLocation = infirmary;
+                }else if(gym.getId().equals(newLocation.getId())) {
+                    currentMapLocation = gym;
+                }
                 moveCounter--;
             } else {
                 throw new NullPointerException();
             }
-            if (destination.equals("lake") && inventoryList.contains("baseball bat")) {
-                System.out.println("you used your Big brain and just swam away");
-                gameRunning = false;
-                gameWin = true;
-            }
+
+            new MusicPlayer("/foot-steps.wav").playOnce();
             showStatus();
         } catch (Exception e) {
             System.out.println("invalid direction");
@@ -127,7 +166,6 @@ public class GameLogic {
                 if (inventoryList.get(i).contains(selection)) {
                     doItemAction(useItem.getAction(), useItem, selection);
                     break;
-
                 }
             }
         } catch (NullPointerException e) {
@@ -147,22 +185,34 @@ public class GameLogic {
                 break;
             case "energy_boost":
                 moveCounter += 3;
+                new MusicPlayer("/drink-soda.wav").playOnce();
                 System.out.println(itemDetail.getCorrect_use());
-                System.out.println("+3 moves");
+                System.out.println(ANSI_CYAN +"+3 moves"+ ANSI_RESET);
                 drinkCounter--;
                 if (drinkCounter < 1) {
                     inventoryList.remove("energy drink");
                 }
                 break;
             case "unlock":
-                System.out.println("coming soon: Actual Unlock use");
-                System.out.println(itemDetail.getCorrect_use());
+                if (currentLocation.equals("office")) {
+                    System.out.println(itemDetail.getCorrect_use());
+                    if( !inventoryList.contains("the colt")){
+                        inventoryList.add("the colt");
+                    }
+                    System.out.println("The colt was added to inventory");
+                } else {
+
+                    System.out.println(itemDetail.getIncorrect_use());
+                }
                 break;
             case "swing_bat":
-                if (moveCounter > 10) {
+                if (moveCounter > 10 && currentLocation.equals("office")) {
                     System.out.println(itemDetail.getCorrect_use());
+                    if( !inventoryList.contains("the colt")){
+                        inventoryList.add("the colt");
+                    }
+                    System.out.println("The colt was added to inventory");
                 } else {
-                    System.out.println("not enough moves");
                     System.out.println(itemDetail.getIncorrect_use());
                 }
                 break;
@@ -170,10 +220,43 @@ public class GameLogic {
                 System.out.println(itemDetail.getCorrect_use());
                 illuminationCounter += 3;
                 break;
+            case "cheat":
+                moveCounter += 999;
+                inventoryList.add("the colt");
+                inventoryList.add("hairpin");
+                inventoryList.add("gasoline");
+                inventoryList.add("baseball bat");
+                inventoryList.add("car battery");
+                inventoryList.add("boating manual");
+                System.out.println("several items were added to your inventory type \"status\" to check");
+                inventoryList.remove("golden coin");
+                break;
             case "bus":
                 if (inventoryList.contains("gasoline")
                         && inventoryList.contains("car battery")
                         && currentLocation.equals("school bus")) {
+                    System.out.println(itemDetail.getCorrect_use());
+                    gameWin = true;
+                    gameRunning = false;
+                } else {
+                    System.out.println("You don't quite seem to have all the items you need");
+                }
+                break;
+            case "shoot":
+                if (currentLocation.equals("school bus")){
+                    System.out.println(itemDetail.getCorrect_use());
+                    gameWin = true;
+                    gameRunning = false;
+                }
+                else {
+                    System.out.println(itemDetail.getIncorrect_use());
+                    System.out.println(currentLocation);
+                }
+                break;
+            case "read":
+                if (inventoryList.contains("boating manual")
+                        && currentLocation.equals("lake")) {
+                    System.out.println(itemDetail.getCorrect_use());
                     gameWin = true;
                     gameRunning = false;
                 } else {
@@ -213,12 +296,20 @@ public class GameLogic {
     private static void SearchRoom() throws Exception {
         String items;
         moveCounter--;
-        if (illumination == true) {
+        if (illumination == true){
             System.out.println("the flashlight was used in the search");
+            illuminationCounter--;
+            if (illuminationCounter < 1) {
+                illumination = false;
+            }
+                drinkCounter++;
+                System.out.println("energy drink was added to your inventory");
+                if( !inventoryList.contains("energy drink")){
+                    inventoryList.add("energy drink");
+                }
         }
         try {
-            MapLocation location = new MapLocation(currentLocation);
-            items = location.getItem();
+            items = currentMapLocation.getItem();
             String delimin = ",";
             StringTokenizer tokenizer = new StringTokenizer(items, delimin);
             while (tokenizer.hasMoreTokens()) {
@@ -226,7 +317,7 @@ public class GameLogic {
                 if (item.equals("energy drink")) {
                     drinkCounter++;
                     System.out.println(item + " was added to your inventory");
-                    if( !inventoryList.contains(item)){
+                   if( !inventoryList.contains(item)){
                         inventoryList.add(item);
                     }
                    ;
@@ -234,9 +325,14 @@ public class GameLogic {
                     if( !inventoryList.contains(item)){
                         inventoryList.add(item);
                         System.out.println(item + " was added to your inventory");
+
                     }
                 }
+
             }
+            currentMapLocation.setItem("");
+            //System.out.println(location.getItem());
+
         } catch (Exception e) {
             System.out.println("nothing here");
         }
@@ -245,8 +341,7 @@ public class GameLogic {
     }
 
     public static void showStatus() throws Exception {
-        MapLocation location = new MapLocation(currentLocation);
-        String desc = location.getDescription();
+        String desc = currentMapLocation.getDescription();
         System.out.println("--------------------------------");
         System.out.println("Location: " + currentLocation);
         System.out.println("Description: " + desc);
@@ -258,6 +353,20 @@ public class GameLogic {
             System.out.println("Flashlight battery: " + illuminationCounter);
         }
         System.out.println("Moves: " + moveCounter);
+        if(monster.getName().equals("vampire")){
+            if(currentLocation.equals("log cabin") || currentLocation.equals("cafeteria")|| currentLocation.equals("lake")  || currentLocation.equals("school bus")) {
+                monsterMash(monster);
+            }
+        }else if(monster.getName().equals("werewolf")){
+            if(currentLocation.equals("office") || currentLocation.equals("woods") || currentLocation.equals("lake") || currentLocation.equals("school bus")) {
+                monsterMash(monster);
+            }
+        }else if(monster.getName().equals("ghost")){
+            if(currentLocation.equals("boys cabin") || currentLocation.equals("infirmary") || currentLocation.equals("lake") || currentLocation.equals("school bus")) {
+                monsterMash(monster);
+            }
+        }
+
 
     }
 
@@ -275,6 +384,18 @@ public class GameLogic {
                 }
             }
 
+        }
+    }
+    public static void monsterMash(MonsterSelect monster){
+        Random random = new Random();
+        int randomNum =  random.nextInt(2) + 1;
+        if(randomNum == 1){
+            System.out.println(ANSI_RED + monster.getName() + ": " + monster.getPlayer_loss() + ANSI_RESET);
+            System.out.println(ANSI_RED+"You shake in fear and lose 2 moves."+ANSI_RESET);
+            moveCounter -= 2;
+        }else{
+            System.out.println(ANSI_RED + monster.getName() + ": " + monster.getPlayer_escape() + ANSI_RESET);
+            System.out.println(ANSI_BLUE+"You barley escaped an attack from the " + monster.getName()+"."+ANSI_RESET);
         }
     }
 }
